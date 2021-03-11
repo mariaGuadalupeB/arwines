@@ -1,0 +1,38 @@
+.titulo{
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 40px;
+}
+
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+    margin-top: 57px;
+  }
+  
+  .centrado {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+  }
+  
+  .style {
+    text-decoration: none;
+    color: black;
+  }
+  
+  .barra {
+    background: #38182f;
+    height: 64px;
+    box-shadow: 0 1px 4px #a8a5a3;
+    z-index: 1000;
+    position: relative;
+    padding: 0px 120px;
+  }

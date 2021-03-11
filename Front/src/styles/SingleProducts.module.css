@@ -1,0 +1,18 @@
+.barra {
+  background: #38182f;
+  height: 64px;
+  box-shadow: 0 1px 4px #a8a5a3;
+  z-index: 1000;
+  position: relative;
+  padding: 0px 120px;
+}
+
+.unico {
+  font-family: "Playfair Display", serif;
+  font-weight: 400;
+}
+
+.unico img {
+  margin-top: 74px;
+  width: 383px;
+}

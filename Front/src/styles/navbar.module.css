@@ -1,0 +1,53 @@
+*{
+    margin: 0;
+  }
+.barraD{
+    background: #fff;
+    height: 64px;
+    box-shadow: 0 1px 4px #a8a5a3;
+    z-index: 1000;
+    position: relative; 
+    padding: 0px 120px;
+  }
+  .barraD img {
+    width: 86px;
+  }
+  .barraD input {
+    font-size: 15px;
+    line-height: normal;
+    font-weight: 400;
+    color: #333;
+    background-position: 16px;
+    background-size: 16px;
+    background-repeat: no-repeat;
+    outline: none;
+    padding: 4px 0 4px 15px;
+    border: 1px solid #dedede;
+    transition: width .6s ease-in-out;
+    height: 40px;
+    background-color: #fff;
+    border-radius: 32px;
+    width: 17em;
+    margin-top: 5px;
+  }
+   .orden {
+    display: flex;
+  } 
+  input {
+      padding-left: 63px;
+  }
+  .barraI{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -35px;
+  }
+  .botonLogIn{
+    margin-top: -8px;
+    margin-right: 8px;
+  }
+  .botonLogOut{
+    margin-top: -8px;
+  }
+  .carrito{
+    padding-left: 23px;
+  }

@@ -18,9 +18,10 @@ userController.register = (req, res, next) => {
         user.getCarts({where: {status : "active"}})
        .then(cart => {
             const token = user.generateToken()
-            res.status(201).send({
-            ...user.dataValues , cart: cart[0], token    
-            })   
+            
+            helpers.getCart_items(user.id).then(cart=>{
+                return res.status(200).send({ token, cart, user: user.dataValues })
+            })
         })    
     })
     .catch(next);

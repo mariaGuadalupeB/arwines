@@ -1,9 +1,8 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { setNewUser } from "../store/user";
 import { validateEmail, validatePassword } from "../utils/validations"
-import { CircularProgress } from "@material-ui/core"
 
 // MATERIAL UI
 import Button from "@material-ui/core/Button"
@@ -41,7 +40,6 @@ const Register = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
-  //const user = useSelector((state) => state.user);
 
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");

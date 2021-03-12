@@ -1,9 +1,7 @@
-import { jssPreset } from '@material-ui/styles'
 import { createAction, createAsyncThunk, createReducer } from '@reduxjs/toolkit'
 import axios from "axios"
-// aca van a ir las acciones de user
 
-//register
+//REGISTER 
 export const setNewUser = createAsyncThunk('SET_USER', (newUser, thunkAPI)=>{
     return axios 
     .post("http://localhost:5000/api/user/register", newUser)
@@ -14,13 +12,14 @@ export const setNewUser = createAsyncThunk('SET_USER', (newUser, thunkAPI)=>{
         
         const session = {user, userCart, token}
 
+        localStorage.setItem("cart", JSON.stringify(userCart.cart_items))  
         localStorage.setItem("session", JSON.stringify(session));
 
         return {token, userCart, user}
     })
 })
 
-// login
+// LOGIN
 export const setLoggedUser = createAsyncThunk('SET_USER', (loggedUser, thunkAPI)=>{
     return axios 
     .post("http://localhost:5000/api/user/login", loggedUser)
@@ -31,7 +30,8 @@ export const setLoggedUser = createAsyncThunk('SET_USER', (loggedUser, thunkAPI)
         const user = data.user
         
         const session = {user, userCart, token}
-
+        
+        localStorage.setItem("cart", JSON.stringify(userCart.cart_items))  
         localStorage.setItem("session", JSON.stringify(session));
 
         return {token, userCart, user}
@@ -42,7 +42,6 @@ const user = JSON.parse(localStorage.getItem("session")) || {}
 
 export const cleanUser = createAction("CLEAN_USER")
 
-// no lo necesito para el register, solo para el login
 const userReducer = createReducer(user , {
     [setLoggedUser.fulfilled]: function (state, action) {
         return action.payload

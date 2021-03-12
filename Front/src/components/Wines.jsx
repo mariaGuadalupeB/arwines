@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import imagenes from "../assets/media/imagenes"
 import style from "../styles/Products.module.css";
 import {useDispatch, useSelector} from 'react-redux';
 import {setWines} from '../store/wines';
@@ -17,7 +16,7 @@ export default () => {
   return (
     <div>
       <div className={style.titulo}>
-        <h1>VINOS</h1>
+        <h1>ARWines</h1>
       </div>
       <div className={style.centrado}>
         <div className={style.wrapper}>

@@ -63,7 +63,6 @@ const Login = () => {
       setIsLoading(false)
       history.push("/")
     })
-     // aca lo mando a user donde guardo la informacion del login
   };
 
   const changeEmail = (e) => {

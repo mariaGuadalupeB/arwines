@@ -1,4 +1,4 @@
-import { createAction, createReducer, createAsyncThunk } from '@reduxjs/toolkit'
+import { createReducer, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 export const setWine = createAsyncThunk('SET_WINE', id => {

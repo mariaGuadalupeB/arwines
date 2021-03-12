@@ -1,7 +1,5 @@
 import axios from 'axios';
-import { createAction, createReducer, createAsyncThunk } from "@reduxjs/toolkit";
-// aca van a ir las acciones de user
-// un usuario loggeado
+import { createReducer, createAsyncThunk } from "@reduxjs/toolkit";
 const baseUrl = 'http://localhost:5000/api'
 
 export const setWines = createAsyncThunk('SET_WINES', () => {

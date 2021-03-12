@@ -1,33 +1,13 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import setCart from "../store/cart"
-import { findProducts } from "../store/cart"
-import Navbar from './Navbar'
+import { Link } from "react-router-dom";
+import style from "../styles/Products.module.css";
+
 
 // MATERIAL UI
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
-
-// evalue si el user existe, si no en el use Efect de component did mount un history push a loggin
-// si existe lo dejamos pasar
-
-// Descripción
-
-// - Acceder a una ruta que me mustre los productos que tengo agregados al carrito. ✓
-// - Ver un total a pagar por la suma de TODOS los productos agregados al carrito
-// - Pagar mi carrito (en caso de estar logueado, sino que me redirija al login).
-
-// To do
-
-// - Ver productos agregados al carrito y la cantidad de cada uno
-// - Poder eliminar un producto desde el carrito
-// - Poder aumentar o disminuir la cantidad de elementos en un mismo producto
-// - Ver total a pagar
-// - Llevarme a la vista de checkout para realziar el pago
-// - En caso de estar deslogueado, redirigirme al login  ✓
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -57,68 +37,62 @@ const useStyles = makeStyles((theme) => ({
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
-  const user = useSelector((state) => state.user);
+  const [productsArr, setProductsArr] = React.useState([])
 
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const classes = useStyles();
-
-  const [price, setPrice] = React.useState("")
-
-
-  const localStorage = JSON.parse(localStorage.get("userCart"))
-
+  
   React.useEffect(() => {
-    if (!user) {
-      history.push("/login"); // si no existe usuario logeado redirecciona al login
-    }
-    // localStorage.cart_item.map((obj)=>{
-    //   obj.productId
-    // })
+    setProductsArr([])
+    const PromisesProducts = cart.map((cartItem) => {
+      const id = cartItem.productId
+      return axios.get(`http://localhost:5000/api/product/${id}`)
+      .then(({ data }) => {
+        data.quantity = cartItem.quantity
+        return data
+      })
+    })
+
+    Promise.all(PromisesProducts)
+    .then(cartItems => {
+      setProductsArr(cartItems)
+    })
   }, []);
-
-  React.useEffect(() => {
-    // cada vez que se modifique cart (eliminan o agregan productos) se actualiza el precio total y cantidad de productos
-    
-
-  }, [cart]);
-
-  const totalPrice = () => {
-    // aca sumaria el precio de los items que hay en el carrito
-  };
-
-  const deleteProduct = () => {
-    // logica para eliminar un producto del carrito
-  };
-
-  const deleteAllProducts = () => {
-
-  }
-
-  const addProduct = () => {
-
-  }
-
+  
   return (
     <div>
-      <Navbar />
         <h1>CARRITO</h1><br />
         <p>
           Productos del carrito:
         </p>
-      {cart && cart.map((item)=>{
-        <div> {item.id}{/* item.cantidad */}</div>
-      })}
+      {
+        productsArr.length && productsArr.map((wine, i)=>
+        (
+          <div key={i}>
+              <Link to={`/products/${wine.id}`} className={style.style}>
+                <div>
+                  <img src={wine.image_path} />
+                  <div className={style.centrado}>
+                    <div>
+                      <p> {wine.name} </p>
+                      <p>Precio: $ {wine.price} </p>
+                      <p>Cantidad pedida: {wine.quantity} </p>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            </div>
+        ))
+      }
       
-      <h4>PRECIO TOTAL</h4><br />
-      <button onClick={addProduct}>+1 PRODUCTO</button><br />
-      <button onClick={deleteProduct}>-1 PRODUCTO</button><br />
-      <button onClick={deleteAllProducts}>ELIMINAR</button><br />
-      <button>COMPRAR</button><br />
+      <h4>SUBTOTAL: 
+        {
+        productsArr.length && productsArr.reduce((i, wine) => i+= wine.price * wine.quantity
+        ,0)
+        }
+
+      </h4><br />
       
     </div>
   );
 };
 
 export default Cart;
-

@@ -7,14 +7,16 @@ import cartReducer from './cart'
 import wineReducer from "./wine"
 import winesReducer from "./wines"
 
+import setProductsArrReducer from "./productsArr"
 
 const store = configureStore({
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
-    reducer: { // aca va todo nuestro estados 
-        user: userReducer, // es user reducer van a ir todas las cosas que van a ir dentro de user
+    reducer: { 
+        user: userReducer, 
         cart: cartReducer,
         selectedWine: wineReducer,
         wines: winesReducer,
+        productos: setProductsArrReducer,
     }
 })
 

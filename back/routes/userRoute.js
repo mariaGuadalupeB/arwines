@@ -10,7 +10,7 @@ router.post("/login", userController.login);
 router.put("/:id/update", authJWT, userController.updateUser);
 router.put("/:id/update", adminCheck, userController.updateAdmin);
 
-// router.get("/:id", checkJWT , userController.getUser);
+router.get("/:id", authJWT , userController.getUser);
 router.get("/:id/users", adminCheck, userController.getUsersAdmin);
 
 router.delete("/:id/delete", adminCheck, userController.deleteUser); 

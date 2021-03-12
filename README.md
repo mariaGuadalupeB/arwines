@@ -10,6 +10,7 @@ Objetivos 1ra etapa:
 - Poder registrarse y loggearse,
 - Ver lista de productos,
 - Ver producto individual, 
+- Carrito de compras
 
 Desarrollo: 
 - Back y Front separado en puertos y modulos,

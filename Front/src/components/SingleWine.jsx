@@ -1,12 +1,13 @@
 import React from "react";
 import imagenes from "../assets/media/imagenes"
 import style from "../styles/SingleProducts.module.css"
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {setWine} from '../store/wine'; 
 import {Link} from 'react-router-dom'
 
 export default function SingleWine({match}) {
   const dispatch = useDispatch();
+  const selectedWine = useSelector(state => state.selectedWine)
 
   React.useEffect(() => {
     dispatch(setWine(parseInt(match.params.id)))
@@ -17,11 +18,10 @@ export default function SingleWine({match}) {
     <div className={style.barra}>
       {console.log(match)}
     <div className={style.unico} >
-       <img src={imagenes[0].Imagen} />
-       <h3>{imagenes[0].Marca}</h3>
-      <h3>Año: {imagenes[0].Año}</h3>
-      <h3>Variedad de la Uva: {imagenes[0].Uva}</h3>
-      <h3>Precio: {imagenes[0].Precio}</h3>
+       <img src={selectedWine.image_path} />
+       <h3>{selectedWine.name}</h3>
+      <h3>Descripcion: {selectedWine.description}</h3>
+      <h3>Precio: $ {selectedWine.price}</h3>
       <div>
       <Link to="/"> Volver Atrás</Link>
       </div>

@@ -3,13 +3,15 @@ import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button';
 import themes from '../themes/themesConfig'
 import styles from '../styles/navbar.module.css'
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {queryWines} from '../store/wines';
+import {cleanUser} from "../store/user"
 
 const Navbar = () => {
+    const user = useSelector((state) => state.user)
     const [query, setQuery] = React.useState('');
     const dispatch = useDispatch(); 
-
+    const isLoggedIn = Object.keys(user).length 
     const handleQuery = string => {
         dispatch(queryWines(string))
           .then(() => {
@@ -17,6 +19,11 @@ const Navbar = () => {
             setQuery('');
           });
     };    
+
+    const logOutHandler = () => {
+        localStorage.clear()
+        dispatch(cleanUser())
+    }
 
     return (
         <div className='barra'>
@@ -30,10 +37,22 @@ const Navbar = () => {
                 </div>
                 <div className={styles.barraI}>
                     <div className={styles.botonLogIn}>
-                        <Button variant="outlined" color='primary'> Log in</Button>
+                        <Link to={isLoggedIn ? "/" : "/login"} onClick={logOutHandler}>
+                            <Button variant="outlined" color='primary' >  { isLoggedIn ? "Log Out" : "Sign In" } </Button>
+                        </Link>
                     </div>
+                    
                     <div className={styles.botonLogOut}>
-                        <Button variant="outlined" color='primary'> Register</Button>
+                        {
+                            !isLoggedIn ? 
+                            (
+                                <Link to="/register">
+                                    <Button variant="contained" color='primary'> Register</Button>
+                                </Link>
+                            ) 
+                            : 
+                                null
+                        }
                     </div>
                     <div className={styles.carrito}>
                         <Link to='/'><span className="material-icons">shopping_cart</span></Link>

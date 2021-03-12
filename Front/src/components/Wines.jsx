@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import imagenes from "../assets/media/imagenes";
+import imagenes from "../assets/media/imagenes"
 import style from "../styles/Products.module.css";
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {setWines} from '../store/wines';
 
 export default () => {
   const dispatch = useDispatch();
+  const wines = useSelector(state => state.wines)
 
   React.useEffect(() => {
     dispatch(setWines())
@@ -20,16 +21,15 @@ export default () => {
       </div>
       <div className={style.centrado}>
         <div className={style.wrapper}>
-          {imagenes.map((imagen) => (
-            <div key={imagen.id}>
-              <Link to={`/products/${imagen.id}`} className={style.style}>
-                <div key={imagen.id} className="col-xs-4">
-                  <img src={imagen.Imagen} />
+          {wines.wines && wines.wines.map((wine) => (
+            <div key={wine.id}>
+              <Link to={`/products/${wine.id}`} className={style.style}>
+                <div>
+                  <img src={wine.image_path} />
                   <div className={style.centrado}>
                     <div>
-                      <p> {imagen.Marca} </p>
-                      <p>Año: {imagen.Año} </p>
-                      <p>Precio: {imagen.Precio} </p>
+                      <p> {wine.name} </p>
+                      <p>Precio: $ {wine.price} </p>
                     </div>
                   </div>
                 </div>

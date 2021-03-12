@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { setLoggedUser } from "../store/user";
 import { validateEmail, validatePassword } from "../utils/validations";
-import Navbar from './Navbar'
 
 // MATERIAL UI
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
+import { CircularProgress } from "@material-ui/core"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,17 +47,23 @@ const Login = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [error, setError] = React.useState("");
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsLoading(true)
     if (validateEmail(email) === false) {
       return setError("Email invalido");
     }
     if (validatePassword(password) === false) {
       return setError("Password invalido");
     }
-    dispatch(setLoggedUser({ email, password })); // aca lo mando a user donde guardo la informacion del login
-    history.push("/");
+    dispatch(setLoggedUser({ email, password }))
+    .then(() => {
+      setIsLoading(false)
+      history.push("/")
+    })
+     // aca lo mando a user donde guardo la informacion del login
   };
 
   const changeEmail = (e) => {
@@ -70,7 +76,6 @@ const Login = () => {
 
   return (
     <div>
-      <Navbar />
       <Grid className={classes.grid}>
         <form onSubmit={handleSubmit}>
           <TextField
@@ -122,7 +127,11 @@ const Login = () => {
               color="primary"
               >
               enviar
-            </Button><br />
+            </Button>
+            {
+              isLoading ? <CircularProgress/> : null
+            }
+            <br />
             <div>
               {error && <div>{error}</div>}
             </div>

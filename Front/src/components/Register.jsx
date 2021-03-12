@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { setNewUser } from "../store/user";
 import { validateEmail, validatePassword } from "../utils/validations"
-import Navbar from './Navbar'
+import { CircularProgress } from "@material-ui/core"
 
 // MATERIAL UI
 import Button from "@material-ui/core/Button"
@@ -59,7 +59,7 @@ const Register = () => {
     } 
     
     dispatch(setNewUser({ firstName, lastName, email, password }));
-    history.push("/login");
+    history.push("/");
   };
 
   const changeFirstName = (e) => {
@@ -90,7 +90,6 @@ const Register = () => {
 
   return (
     <div>
-      <Navbar />
       <Grid className={classes.grid}>
         <form onSubmit={handleSubmit}>
         <TextField
@@ -183,6 +182,7 @@ const Register = () => {
               >
           enviar
         </Button>
+
         </div>
         
         {error && <div>{error}</div>}

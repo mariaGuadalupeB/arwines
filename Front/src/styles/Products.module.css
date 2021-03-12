@@ -8,8 +8,8 @@
 
 .wrapper {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 10px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10rem;
     grid-auto-rows: minmax(100px, auto);
     margin-top: 57px;
   }

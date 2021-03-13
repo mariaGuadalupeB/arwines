@@ -1,4 +1,6 @@
-const Category = require('../db/models/Category');
+// const Category = require('../db/models/Category');
+
+const {Category} = require('../db/models')
 
 controller = {};
 

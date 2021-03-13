@@ -1,6 +1,6 @@
 const db = require("../index");
 const { Model } = require("sequelize");
-const User = require("./User");
+// const User = require("./User");
 
 const S = require("sequelize");
 
@@ -20,6 +20,6 @@ Role.init(
    }
 )
 
-Role.belongsToMany(User,{through: 'user_roles', foreignKey: 'roleId', otherKey: 'userId'})
+// Role.belongsToMany(User,{through: 'user_roles', foreignKey: 'roleId', otherKey: 'userId'})
 
 module.exports = Role;

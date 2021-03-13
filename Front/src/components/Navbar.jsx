@@ -5,14 +5,14 @@ import themes from '../themes/themesConfig'
 import styles from '../styles/navbar.module.css'
 import {useDispatch, useSelector} from 'react-redux';
 import {queryWines} from '../store/wines';
-import {cleanUser} from "../store/user"
+import {userLogout} from "../store/user"
 import axios from "axios";
 import { productsArr } from "../store/productsArr"
 
 
 const Navbar = () => {
     const user = useSelector((state) => state.user)
-    const cart = useSelector((state) => state.cart)
+    const cart_items = useSelector((state) => state.cart_items)
     const history = useHistory()
 
     const [query, setQuery] = React.useState('');
@@ -29,14 +29,13 @@ const Navbar = () => {
     const logOutHandler = () => {
         if(isLoggedIn) {
             const token = user.token
-            axios.put("http://localhost:5000/api/cart", cart, {
+            axios.put("http://localhost:5000/api/cart", cart_items, {
                 headers: { Authorization: `Bearer ${token}` }
             })
             .then(({data}) => data)
             
             localStorage.clear()
-            dispatch(cleanUser())
-            dispatch(productsArr([]))
+            dispatch(userLogout())
 
             history.push("/")
         }else{

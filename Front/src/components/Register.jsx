@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-import { setNewUser } from "../store/user";
+import { sendRegisterRequest } from "../store/user";
 import { validateEmail, validatePassword } from "../utils/validations"
 
 // MATERIAL UI
@@ -56,7 +56,7 @@ const Register = () => {
       return setError("Credenciales invalidas")
     } 
     
-    dispatch(setNewUser({ firstName, lastName, email, password }));
+    dispatch(sendRegisterRequest({ firstName, lastName, email, password }));
     history.push("/");
   };
 

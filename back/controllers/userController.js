@@ -1,7 +1,7 @@
 
 require('dotenv').config();
 const helpers = require('../utils/helpers')
-const {User, Cart} = require('../db/models')
+const {User, Cart,Cart_item} = require('../db/models')
 
 // const User = require("../db/models/User");
 // const Cart = require("../db/models/Cart");
@@ -14,36 +14,47 @@ const secret = process.env.SECRET;
 
 const userController = {}
 
+// {
+//     "user": {
+//         "access_token": "SFMyNTY.NDg4NDg5NGQtY2FmYy00MzBkLThlZWYtYTNiY2E5YmZhY2Y4.R9YwrQ8kFDrQ4cuJG95c-1hwlksuvTGH6DZR7d-et34",
+//         "email": "test10@example.com",
+//         "id": 17,
+//       
+//         "type": "customer"
+//     }
+// }
+
+
 userController.register = (req, res, next) => {
     User.create(req.body)
    .then((user) => {
-        user.getCarts({where: {status : "active"}})
-       .then(cart => {
-            const token = user.generateToken()
-            
-            helpers.getCart_items(user.id).then(cart=>{
-                return res.status(200).send({ token, cart, user: user.dataValues })
-            })
+       const token = user.generateToken()
+       const {id,firstName,email, admin} = user.dataValues
+
+        user.getCarts({where: {status : "active"}, include: Cart_item})
+        .then(cart => {
+            const {cart_items} = cart[0]
+            return res.status(200).send({user: { token, id, email, firstName, admin, cart_items }}) 
         })    
     })
     .catch(next);
 } 
 userController.login =  (req, res, next) => {
     const { email, password } = req.body;
+
     User.findOne({where: {email}})
     .then((user) => {
-        console.log(user)
-        if(!user){
-            return res.status(401).send("Invalid credentials")
-        }
-        if(!user.validPassword(password)){  
-            return res.status(401).send("Invalid credentials")
-        }
-        const token = user.generateToken()
+        if(!user || !user.validPassword(password)) return res.status(401).send("Invalid credentials")
 
-        helpers.getCart_items(user.id).then(cart=>{
-            return res.status(200).send({ token, cart, user: user.dataValues })
-        })
+        const token = user.generateToken()
+        const {id,firstName, admin} = user.dataValues
+
+        user.getCarts({where: {status : "active"}, include: Cart_item})
+        .then(cart => {
+            
+            const {cart_items} = cart[0]
+            return res.status(200).send({user: { token, id, email, firstName, admin, cart_items }}) 
+        })    
     })
 }
 userController.updateUser = (req, res, next) => {

@@ -1,54 +1,48 @@
 import { createAction, createAsyncThunk, createReducer } from '@reduxjs/toolkit'
 import axios from "axios"
 
+
+
 //REGISTER 
-export const setNewUser = createAsyncThunk('SET_USER', (newUser, thunkAPI)=>{
+export const sendRegisterRequest = createAsyncThunk('USER_REGISTER_REQUEST', (newUser, thunkAPI)=>{
     return axios 
     .post("http://localhost:5000/api/user/register", newUser)
-    .then(({ data }) => {
-        const token = data.token
-        const userCart = data.cart
-        const user = data.user
-        
-        const session = {user, userCart, token}
+    .then(({ data: {user} }) => {
+        const {token, id, email, firstName, admin, cart_items} = user
+        const userData = {token, id, email, firstName, admin, cart_items}
 
-        localStorage.setItem("cart", JSON.stringify(userCart.cart_items))  
-        localStorage.setItem("session", JSON.stringify(session));
+        localStorage.setItem("user", JSON.stringify(userData));
 
-        return {token, userCart, user}
+        return userData
     })
 })
 
 // LOGIN
-export const setLoggedUser = createAsyncThunk('SET_USER', (loggedUser, thunkAPI)=>{
+export const sendLoginRequest = createAsyncThunk('USER_LOGIN_REQUEST', (loggedUser, thunkAPI)=>{
     return axios 
     .post("http://localhost:5000/api/user/login", loggedUser)
-    .then(({ data }) => {
+    .then(({ data: {user} }) => {
+        const {token, id, email, firstName, admin, cart_items} = user
+        const userData = {token, id, email, firstName, admin, cart_items}
         
-        const token = data.token
-        const userCart = data.cart
-        const user = data.user
         
-        const session = {user, userCart, token}
-        
-        localStorage.setItem("cart", JSON.stringify(userCart.cart_items))  
-        localStorage.setItem("session", JSON.stringify(session));
+        localStorage.setItem("user", JSON.stringify(userData));
 
-        return {token, userCart, user}
+        return userData
     })
 })
 
-const user = JSON.parse(localStorage.getItem("session")) || {}
+//LOGOUT
+export const userLogout = createAction("USER_LOGOUT")
 
-export const cleanUser = createAction("CLEAN_USER")
+//USER PERSIST
+const user = JSON.parse(localStorage.getItem("user")) || {}
 
+//REDUCER
 const userReducer = createReducer(user , {
-    [setLoggedUser.fulfilled]: function (state, action) {
-        return action.payload
-    },
-    [cleanUser] : function (state, action) {
-        return {}
-    }
+    [sendRegisterRequest.fulfilled]: (state, action) => action.payload,
+    [sendLoginRequest.fulfilled]: (state, action) => action.payload,
+    [userLogout] : (state, action) => {}
 })
 
 export default userReducer

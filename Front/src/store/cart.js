@@ -1,15 +1,19 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 
 
-export const saveCart = createAction("SAVE_CART")
+export const saveCartItems = createAction("SAVE_CART_ITEMS")
 
-const cart = JSON.parse(localStorage.getItem("cart")) || []
+function userLocalCartItems() {
+    const userInLocalStorage = JSON.parse(localStorage.getItem("users"))
+    return userInLocalStorage && userInLocalStorage.cart_items 
+}
 
-const cartReducer = createReducer(cart, {
-    [saveCart]: (state, action) => [ ...state , action.payload ]
+const cart_items = userLocalCartItems() || []
+
+const cartItemsReducer = createReducer(cart_items, {
+    [saveCartItems]: (state, action) => [ ...state , action.payload ]
 })
 
 
 
-export default cartReducer
-
+export default cartItemsReducer

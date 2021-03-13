@@ -6,8 +6,7 @@ const S = require("sequelize");
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken')
 
-// const Cart  = require("./Cart");
-
+const Cart  = require("./Cart");
 
 class User extends Model {
 	removeFavorite(product) {

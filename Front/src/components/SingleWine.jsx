@@ -3,7 +3,7 @@ import style from "../styles/SingleProducts.module.css"
 import {useDispatch, useSelector} from 'react-redux';
 import {setWine} from '../store/wine'; 
 import {Link} from 'react-router-dom'
-import {saveCart} from '../store/cart'
+import {saveCartItems} from '../store/cart'
 import { Button, Box }  from "@material-ui/core"
 import { useHistory } from "react-router-dom";
 
@@ -36,7 +36,7 @@ export default function SingleWine({match}) {
           })
         localStorage.setItem("cart", JSON.stringify(updatedCart))
     
-          dispatch(saveCart({
+          dispatch(saveCartItems({
           productId: selectedWine.id,
           quantity: +quantity
         }))  

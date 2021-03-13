@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const Cart = () => {
-  const cart = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.cart_items);
   const [productsArr, setProductsArr] = React.useState([])
 
   

@@ -2,7 +2,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { setLoggedUser } from "../store/user";
+import { sendLoginRequest } from "../store/user";
 import { validateEmail, validatePassword } from "../utils/validations";
 
 // MATERIAL UI
@@ -42,7 +42,7 @@ const Login = () => {
   const history = useHistory();
   const classes = useStyles();
 
-  const cart = useSelector((state) => state.cart);
+  // const cart = useSelector((state) => state.cart);
 
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -58,7 +58,7 @@ const Login = () => {
     if (validatePassword(password) === false) {
       return setError("Password invalido");
     }
-    dispatch(setLoggedUser({ email, password }))
+    dispatch(sendLoginRequest({ email, password }))
     .then(() => {
       setIsLoading(false)
       history.push("/")

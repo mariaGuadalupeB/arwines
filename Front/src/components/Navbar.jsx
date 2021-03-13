@@ -5,7 +5,7 @@ import themes from '../themes/themesConfig'
 import styles from '../styles/navbar.module.css'
 import {useDispatch, useSelector} from 'react-redux';
 import {queryWines} from '../store/wines';
-import {cleanUser} from "../store/user"
+import {userLogout} from "../store/user"
 import axios from "axios";
 import { productsArr } from "../store/productsArr"
 
@@ -35,7 +35,7 @@ const Navbar = () => {
             .then(({data}) => data)
             
             localStorage.clear()
-            dispatch(cleanUser())
+            dispatch(userLogout())
             dispatch(productsArr([]))
 
             history.push("/")

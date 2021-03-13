@@ -1,9 +1,9 @@
 const db = require("../index");
 const { Model } = require("sequelize");
 const S = require("sequelize");
-const Category = require('./Category');
-const User = require("./User")
-const Cart_item = require("./Cart_item")
+// const Category = require('./Category');
+// const User = require("./User")
+// const Cart_item = require("./Cart_item")
 
 
 class Product extends Model {
@@ -46,16 +46,14 @@ Product.init(
    }
 );
 
+// User.belongsToMany(Product, {through:'favorites'})
+// Product.belongsToMany(User, {through:'favorites'})
 
 
-User.belongsToMany(Product, {through:'favorites'})
-Product.belongsToMany(User, {through:'favorites'})
+// Product.hasMany(Cart_item)
+// Cart_item.belongsTo(Product)
 
-
-Product.hasMany(Cart_item)
-Cart_item.belongsTo(Product)
-
-Product.belongsToMany(Category, {through: 'prod_cats'})
-Category.belongsToMany(Product, {through: 'prod_cats'})
+// Product.belongsToMany(Category, {through: 'prod_cats'})
+// Category.belongsToMany(Product, {through: 'prod_cats'})
 
 module.exports = Product;

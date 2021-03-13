@@ -22,7 +22,7 @@ function randomLink () {
 
 
 function nameGenerator () {
-  const names = ['PAZ','LAGARDE', 'DON VALENTIN', 'RUTINI', 'LUIGI BOSCA', 'OASIS', 'MANOS NEGRAS', 'PORTILLO', 'SALENTEIN']
+  const names = ['PAZ','LAGARDE', 'DON VALENTIN', 'RUTINI', 'LUIGI BOSCA', 'OASIS', 'MANOS NEGRAS', 'PORTILLO', 'SALENTEIN', 'BON VOYAGE']
   const types = ['MALBEC', 'ROSADO', 'BLANCO', 'PETIT NOIR', 'SYRAH', 'CABERNET SAUVIGNON', 'OTRO CABERNET', 'BLANCO BIEN SUAVE', 'HERMOSO', 'DELIZIA']
 
   return `${names[+Math.random(1).toString().split('.')[1][0]]} ${types[+Math.random(1).toString().split('.')[1][0]]}`

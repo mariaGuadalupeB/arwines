@@ -6,7 +6,7 @@ const S = require("sequelize");
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken')
 
-const Cart  = require("./Cart");
+// const Cart  = require("./Cart");
 
 
 class User extends Model {
@@ -82,18 +82,13 @@ User.beforeCreate((user) => {
 		});
 });
 
-Cart.belongsTo(User)
-User.hasMany(Cart);
+// Cart.belongsTo(User)
+// User.hasMany(Cart);
 
 User.afterCreate((user) => {
 	return user.createCart(Cart)
 	.then(data => data)
 }) 
-
-
-// User.belongsToMany(Role,{through: 'user_roles', foreignKey: 'userId', otherKey: 'roleId'})
-// User.hasMany(Cart);
-
 
 
 module.exports = User;

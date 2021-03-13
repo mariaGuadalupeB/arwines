@@ -1,8 +1,10 @@
 
 require('dotenv').config();
 const helpers = require('../utils/helpers')
-const User = require("../db/models/User");
-const Cart = require("../db/models/Cart");
+const {User, Cart} = require('../db/models')
+
+// const User = require("../db/models/User");
+// const Cart = require("../db/models/Cart");
 
 // const TokenExpired = require("../db/models/TokenExpired") // asumiendo que este la tabla.
 // import { createBlackList } from 'jwt-blacklist'; // si usamos black list jwt  // npm install jwt-blacklist

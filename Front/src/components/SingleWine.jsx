@@ -21,7 +21,7 @@ export default function SingleWine({match}) {
   }, [])
 
     const AddProduct = () => {
-        const prevCart = JSON.parse(localStorage.getItem("cart")) 
+        const prevCart = JSON.parse(localStorage.getItem("cart_items")) 
         let alreadyExisted = false 
         const updatedCart = prevCart.map(cart_item=> {
             if(cart_item.productId == selectedWine.id) {
@@ -34,7 +34,7 @@ export default function SingleWine({match}) {
             productId: selectedWine.id,
             quantity: +quantity
           })
-        localStorage.setItem("cart", JSON.stringify(updatedCart))
+        localStorage.setItem("cart_items", JSON.stringify(updatedCart))
     
           dispatch(saveCartItems({
           productId: selectedWine.id,

@@ -21,10 +21,11 @@ export const sendRegisterRequest = createAsyncThunk('USER_REGISTER_REQUEST', (ne
 export const sendLoginRequest = createAsyncThunk('USER_LOGIN_REQUEST', (loggedUser, thunkAPI)=>{
     return axios 
     .post("http://localhost:5000/api/user/login", loggedUser)
-    .then(({ data }) => {
+    .then(({ data: {user} }) => {
         const {token, id, email, firstName, admin, cart_items} = user
         const userData = {token, id, email, firstName, admin, cart_items}
-
+        
+        
         localStorage.setItem("user", JSON.stringify(userData));
 
         return userData

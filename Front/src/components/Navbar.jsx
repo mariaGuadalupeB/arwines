@@ -12,7 +12,7 @@ import { productsArr } from "../store/productsArr"
 
 const Navbar = () => {
     const user = useSelector((state) => state.user)
-    const cart = useSelector((state) => state.cart)
+    const cart_items = useSelector((state) => state.cart_items)
     const history = useHistory()
 
     const [query, setQuery] = React.useState('');
@@ -29,14 +29,13 @@ const Navbar = () => {
     const logOutHandler = () => {
         if(isLoggedIn) {
             const token = user.token
-            axios.put("http://localhost:5000/api/cart", cart, {
+            axios.put("http://localhost:5000/api/cart", cart_items, {
                 headers: { Authorization: `Bearer ${token}` }
             })
             .then(({data}) => data)
             
             localStorage.clear()
             dispatch(userLogout())
-            dispatch(productsArr([]))
 
             history.push("/")
         }else{

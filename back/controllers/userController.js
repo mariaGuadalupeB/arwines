@@ -45,12 +45,13 @@ userController.login =  (req, res, next) => {
     User.findOne({where: {email}})
     .then((user) => {
         if(!user || !user.validPassword(password)) return res.status(401).send("Invalid credentials")
-        
+
         const token = user.generateToken()
         const {id,firstName, admin} = user.dataValues
 
         user.getCarts({where: {status : "active"}, include: Cart_item})
         .then(cart => {
+            
             const {cart_items} = cart[0]
             return res.status(200).send({user: { token, id, email, firstName, admin, cart_items }}) 
         })    

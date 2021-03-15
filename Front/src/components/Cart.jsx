@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {saveCartItems, fetchCartItemsData} from "../store/cart"
 import { useHistory } from "react-router";
@@ -35,18 +35,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 const Cart = () => {
   const cart_items = useSelector((state) => state.cart_items);
-  const dispatch = useDispatch()
-  React.useEffect(() => {
-    dispatch(fetchCartItemsData(cart_items))  
+  const [items, setItems] = useState([])
 
-    return function() { return 1}
-
-  }, [dispatch]);
+React.useEffect(() => {
+    console.log(cart_items, 'CART ITEMS EN STORE DESDE CART')
+    const promisesProducts = cart_items.map((cartItem) => {
+      const id = cartItem.productId
+      return axios.get(`http://localhost:5000/api/product/${id}`)
+      .then(({ data }) => {
+        data.quantity = cartItem.quantity
+        return data
+      })
+    })
+    Promise.all(promisesProducts).then(cartItems => setItems(cartItems))
+  },[])
  
-  
+
   return (
     <div>
         <h1>CARRITO</h1><br />
@@ -54,10 +60,9 @@ const Cart = () => {
           Productos del carrito:
         </p>
       {
-        cart_items.length && cart_items.map((wine, i)=>
+        items.length && items.map((wine, i)=>
         (
           <div key={i}>
-            {console.log(cart_items, 'WINE')}
               <Link to={`/products/${wine.id}`} className={style.style}>
                 <div>
                   <img src={wine.image_path} />
@@ -76,7 +81,7 @@ const Cart = () => {
       
       <h4>SUBTOTAL: 
         {
-        cart_items.length && cart_items.reduce((i, wine) => i+= wine.price * wine.quantity
+        items.length && items.reduce((i, wine) => i+= wine.price * wine.quantity
         ,0)
         }
 

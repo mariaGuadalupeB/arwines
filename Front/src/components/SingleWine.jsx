@@ -14,32 +14,37 @@ export default function SingleWine({match}) {
   const isLoggedIn = Object.keys(user).length 
   const [quantity, setQuantity] = useState(0)
   const history = useHistory();
-
+  const itmz = JSON.parse(localStorage.getItem("cart_items"))
+  const [items, setItems] = useState(itmz)
+  console.log(items, 'items en state previo al useEffect')
+  
   React.useEffect(() => {
     dispatch(setWine(parseInt(match.params.id)))
-      .then(() => console.log('GOT WINE'));
+    .then(() => console.log('GOT WINE'));
   }, [])
-
-    const AddProduct = () => {
-        const prevCart = JSON.parse(localStorage.getItem("cart_items")) 
+  
+  const AddProduct = () => {
         let alreadyExisted = false 
-        const updatedCart = prevCart.map(cart_item=> {
-            if(cart_item.productId == selectedWine.id) {
-                alreadyExisted = true
-                cart_item.quantity += +quantity
+        const updatedCart = items.map(cart_item=> {
+          if(cart_item.productId === selectedWine.id) {
+            alreadyExisted = true
+            cart_item.quantity += +quantity
+            console.log(cart_item, 'PREVCAR--T')
             }    
             return cart_item
         })
+
         if(!alreadyExisted) updatedCart.push({
             productId: selectedWine.id,
             quantity: +quantity
           })
         localStorage.setItem("cart_items", JSON.stringify(updatedCart))
     
-          dispatch(saveCartItems({
-          productId: selectedWine.id,
-          quantity: +quantity
-        }))  
+        dispatch(saveCartItems(updatedCart))
+        //   dispatch(saveCartItems({
+        //   productId: selectedWine.id,
+        //   quantity: +quantity
+        // }))  
         history.push("/cart")  
       } 
 

@@ -1,18 +1,54 @@
-.barra {
-  background: #38182f;
-  height: 64px;
-  box-shadow: 0 1px 4px #a8a5a3;
-  z-index: 1000;
-  position: relative;
-  padding: 0px 120px;
+.row{
+  margin-right: -15px;
+  margin-left: -15px;
 }
 
 .unico {
-  font-family: "Playfair Display", serif;
+  text-align: center;
+  font-family: 'Playfair Display', serif;
   font-weight: 400;
 }
 
 .unico img {
   margin-top: 74px;
   width: 383px;
+}
+
+.rowDerecha {
+  margin-top: 80px;
+  width: 555px;
+  height: 152px;
+}
+.tituloVino{
+  font-family: 'Playfair Display', serif;
+  font-weight: bold;
+  font-size: 37px;
+  padding: 50px 0px 0px 0px;
+  margin-bottom: 60px;
+}
+.boxPrice {
+  width: 555px;
+  height: 74px;
+}
+.precio {
+  font-weight: bold;
+  font-size: 24px;
+  color: rgb(100,100,100);
+  padding: 10px 0px 30px 0px;  
+}
+.botonAtras {
+  width: 200px;
+  height: 55px;
+  margin: 20px auto;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  padding: 50px 0px 0px 0px;
+  margin-left: -1px;
+}
+.description {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 40px; 
+  color: rgb(100,100,100);
 }

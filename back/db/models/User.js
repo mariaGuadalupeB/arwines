@@ -6,10 +6,10 @@ const S = require("sequelize");
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken')
 
-const Cart  = require("./Cart");
+const Cart = require("./Cart");
 
 class User extends Model {
-	validPassword (loginPassword) {
+	validPassword(loginPassword) {
 		const salt = this.salt // 'askljdhlkiadufvolij123897asclkjhnawm'
 		return this.password === bcrypt.hashSync(loginPassword, salt)
 	}
@@ -24,6 +24,7 @@ class User extends Model {
             {expiresIn: 360000}
         );
     };
+
 }
 
 User.init(
@@ -38,13 +39,13 @@ User.init(
 		},
 		email: {
 			type: S.STRING,
-			 allowNull: false,
-			 unique:true,
-        },
-        address: {
-            type: S.STRING,
-            allowNull: true,
-        },
+			allowNull: false,
+			unique: true,
+		},
+		address: {
+			type: S.STRING,
+			allowNull: true,
+		},
 		password: {
 			type: S.STRING,
 			allowNull: false,
@@ -58,9 +59,10 @@ User.init(
 			type: S.STRING, //askljdhlkiadufvolij123897asclkjhnawm,123
 		},
 	},
-  { sequelize: db,
-    modelName: "user", 
-   }
+	{
+		sequelize: db,
+		modelName: "user",
+	}
 );
 User.beforeCreate((user) => {
 	return bcrypt
@@ -79,8 +81,8 @@ User.beforeCreate((user) => {
 
 User.afterCreate((user) => {
 	return user.createCart(Cart)
-	.then(data => data)
-}) 
+		.then(data => data)
+})
 
 
 module.exports = User;

@@ -6,6 +6,7 @@ import "./App.css";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Cart from "./components/Cart";
+
 import Wines from "./components/Wines";
 import SingleWine from "./components/SingleWine";
 import Navbar from "./components/Navbar";
@@ -27,6 +28,7 @@ function App() {
               path="/products/:id"
               render={({ match }) => <SingleWine match={match} />}
             />
+
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/cart" component={Cart} />

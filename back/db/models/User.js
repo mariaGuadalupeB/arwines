@@ -9,12 +9,6 @@ const jwt = require('jsonwebtoken')
 const Cart  = require("./Cart");
 
 class User extends Model {
-	removeFavorite(product) {
-		return this.removeFavorite(product)
-	}
-	hasFavorite(product) {
-		return this.hasFavorite(product)
-	}
 	validPassword (loginPassword) {
 		const salt = this.salt // 'askljdhlkiadufvolij123897asclkjhnawm'
 		return this.password === bcrypt.hashSync(loginPassword, salt)
@@ -24,7 +18,7 @@ class User extends Model {
             {
                 userId: this.id,
                 email: this.get('email'),
-				admin: this.get('admin')
+				isAdmin: this.get('admin')
             },
             process.env.SECRET || 'arwines',
             {expiresIn: 360000}
@@ -63,7 +57,6 @@ User.init(
 		salt: {
 			type: S.STRING, //askljdhlkiadufvolij123897asclkjhnawm,123
 		},
-
 	},
   { sequelize: db,
     modelName: "user", 

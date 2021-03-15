@@ -25,9 +25,9 @@ export const sendLoginRequest = createAsyncThunk('USER_LOGIN_REQUEST', (loggedUs
         const {token, id, email, firstName, admin, cart_items} = user
         const userData = {token, id, email, firstName, admin, cart_items}
         
-        
         localStorage.setItem("user", JSON.stringify(userData));
-
+        localStorage.setItem("cart_items", JSON.stringify(cart_items));
+        
         return userData
     })
 })
@@ -42,7 +42,7 @@ const user = JSON.parse(localStorage.getItem("user")) || {}
 const userReducer = createReducer(user , {
     [sendRegisterRequest.fulfilled]: (state, action) => action.payload,
     [sendLoginRequest.fulfilled]: (state, action) => action.payload,
-    [userLogout] : (state, action) => {}
+    [userLogout] : (state, action) => ({})
 })
 
 export default userReducer

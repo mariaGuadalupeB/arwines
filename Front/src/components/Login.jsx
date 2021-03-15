@@ -3,6 +3,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { sendLoginRequest } from "../store/user";
+import { saveCartItems } from "../store/cart";
 import { validateEmail, validatePassword } from "../utils/validations";
 
 // MATERIAL UI
@@ -42,16 +43,17 @@ const Login = () => {
   const history = useHistory();
   const classes = useStyles();
 
-  // const cart = useSelector((state) => state.cart);
-
+  // const userCart_items = useSelector((state) => state.user.cart_items);
+  
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [error, setError] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true)
+    
     if (validateEmail(email) === false) {
       return setError("Email invalido");
     }
@@ -60,7 +62,11 @@ const Login = () => {
     }
     dispatch(sendLoginRequest({ email, password }))
     .then(() => {
+      const cart_items = JSON.parse(localStorage.getItem("cart_items"))
+
+      dispatch(saveCartItems(cart_items))
       setIsLoading(false)
+
       history.push("/")
     })
   };

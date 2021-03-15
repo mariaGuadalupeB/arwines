@@ -6,8 +6,9 @@ import styles from '../styles/navbar.module.css'
 import {useDispatch, useSelector} from 'react-redux';
 import {queryWines} from '../store/wines';
 import {userLogout} from "../store/user"
+import {resetCart_items} from "../store/cart"
 import axios from "axios";
-import { productsArr } from "../store/productsArr"
+
 
 
 const Navbar = () => {
@@ -35,7 +36,9 @@ const Navbar = () => {
             .then(({data}) => data)
             
             localStorage.clear()
+            
             dispatch(userLogout())
+            dispatch(resetCart_items())
 
             history.push("/")
         }else{

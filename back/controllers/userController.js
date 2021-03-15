@@ -14,17 +14,6 @@ const secret = process.env.SECRET;
 
 const userController = {}
 
-// {
-//     "user": {
-//         "access_token": "SFMyNTY.NDg4NDg5NGQtY2FmYy00MzBkLThlZWYtYTNiY2E5YmZhY2Y4.R9YwrQ8kFDrQ4cuJG95c-1hwlksuvTGH6DZR7d-et34",
-//         "email": "test10@example.com",
-//         "id": 17,
-//       
-//         "type": "customer"
-//     }
-// }
-
-
 userController.register = (req, res, next) => {
     User.create(req.body)
    .then((user) => {

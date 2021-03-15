@@ -19,7 +19,7 @@ class User extends Model {
 		const salt = this.salt // 'askljdhlkiadufvolij123897asclkjhnawm'
 		return this.password === bcrypt.hashSync(loginPassword, salt)
 	}
-	generateToken = function () {
+	generateToken () {
         return jwt.sign(
             {
                 userId: this.id,

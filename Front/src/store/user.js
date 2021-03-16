@@ -12,7 +12,8 @@ export const sendRegisterRequest = createAsyncThunk('USER_REGISTER_REQUEST', (ne
         const userData = {token, id, email, firstName, admin, cart_items}
 
         localStorage.setItem("user", JSON.stringify(userData));
-
+        localStorage.setItem("cart_items", JSON.stringify(cart_items));
+        
         return userData
     })
 })

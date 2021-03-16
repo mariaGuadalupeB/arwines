@@ -21,7 +21,7 @@ class User extends Model {
 				isAdmin: this.get('admin')
             },
             process.env.SECRET || 'arwines',
-            {expiresIn: 360000}
+            {expiresIn: 360000} //asd1iuh23kuhyasdhkjkhjasdasd
         );
     };
 
@@ -69,15 +69,12 @@ User.beforeCreate((user) => {
 		.genSalt(16)
 		.then((salt) => {
 			user.salt = salt;
-			return bcrypt.hashSync(user.password, salt);
+			return bcrypt.hashSync(user.password, salt); //1234
 		})
 		.then((hash) => {
 			user.password = hash;
 		});
 });
-
-// Cart.belongsTo(User)
-// User.hasMany(Cart);
 
 User.afterCreate((user) => {
 	return user.createCart(Cart)

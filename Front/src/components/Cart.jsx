@@ -52,7 +52,6 @@ React.useEffect(() => {
     Promise.all(promisesProducts).then(cartItems => setItems(cartItems))
   },[])
  
-
   return (
     <div>
         <h1>CARRITO</h1><br />

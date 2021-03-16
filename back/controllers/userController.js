@@ -76,12 +76,12 @@ userController.deleteUser = (req, res, next) => {
         .catch(next);    
     }
 }
-userController.updateAdmin = (req, res, next) => {
-        User.findByPk(req.body.userID)
-        .then(data => data ? data.update(req.body)
-            .then(data => res.send(data) ) : res.sendStatus(404))
-        .catch(next)
-}
+// userController.updateAdmin = (req, res, next) => {
+//         User.findByPk(req.body.userID)
+//         .then(data => data ? data.update(req.body)
+//             .then(data => res.send(data) ) : res.sendStatus(404))
+//         .catch(next)
+// }
 userController.getUsersAdmin = (req, res, next) => {
     User.findAll({})
     .then(data => res.send(data))

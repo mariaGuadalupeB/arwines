@@ -54,8 +54,8 @@ userController.updateUser = (req, res, next) => {
         if(userId === +idToUpdate && req.body.hasOwnProperty(`admin`)) res.status(400).send('You cant modify your own role!')
         else {
             User.findByPk(idToUpdate)
-            .then(user => user ? user.update(req.body)
-            .then(user =>  res.send(user) ) : res.sendStatus(404))
+            .then(user => user ? user.update(req.body) : res.sendStatus(404))
+            .then(user =>  res.status(200).send(user))
             .catch(next)
         }
     }

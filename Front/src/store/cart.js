@@ -7,7 +7,6 @@ export const resetCart_items = createAction("RESET_CART_ITEMS")
 
 export const saveCartItems = createAction("SAVE_CART_ITEMS")
 
-
 export const sendLoginRequest = createAsyncThunk('USER_LOGIN_REQUEST', (loggedUser, thunkAPI)=>{
     return axios 
     .post("http://localhost:5000/api/user/login", loggedUser)
@@ -21,15 +20,6 @@ export const sendLoginRequest = createAsyncThunk('USER_LOGIN_REQUEST', (loggedUs
         return userData
     })
 })
-
-/*
-CONFIRMAR COMPRA
-
-user = cart.status 'active'
-axios.post  -> /cart/:id -> status = 'pending'
-            -> crear carrito nuevo al usuario -> status 'active'
-            -> send email
-*/
 
 const cart_items = JSON.parse(localStorage.getItem("cart_items")) || []
 

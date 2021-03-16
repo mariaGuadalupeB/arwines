@@ -45,7 +45,7 @@ export default function SingleWine({match}) {
         //   quantity: +quantity
         // }))  
         history.push("/cart")  
-      } 
+      }
 
   
   
@@ -83,6 +83,7 @@ export default function SingleWine({match}) {
                     </select>
                     {
                       quantity ?
+
                         <Button variant="contained" color="primary" onClick={AddProduct} >AGREGAR</Button>
                         :
                         <Button variant="contained" color="primary" onClick={AddProduct} disabled >AGREGAR</Button>

@@ -48,6 +48,7 @@ export default function SingleWine({ match }) {
         history.push("/cart")  
       } 
 
+
   return (
     <div className='row'>
       <Grid container>
@@ -99,3 +100,4 @@ export default function SingleWine({ match }) {
 
   );
 }
+

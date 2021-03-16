@@ -21,6 +21,8 @@ function App() {
           <Navbar />
           <Switch>
             <Route exact path="/" component={Wines} />
+            <Route path="/search/:query"  render={({match}) => <Wines search={match}/> } />
+            
             <Route exact path="/products" component={Wines} />
             <Route
               exact

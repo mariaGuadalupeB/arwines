@@ -32,8 +32,8 @@ function weightGenerator () {
 }
 
 function randomCategory() {
-  const cats = [`oro verde`,`enjuague paladar`,`suave hito`]
-  return [cats[Math.floor(Math.random() *2) +1]]
+  const cats = ['tinto', 'blanco', 'rosado' ]
+  return Math.floor(Math.random() * cats.length)
 }
 
 
@@ -47,7 +47,7 @@ function wineGenerator () {
     quantity: weightGenerator(),
     image_path: randomLink(),
     price: weightGenerator(),
-    categories: [],
+    categories: randomCategory(),
   }
 }
 

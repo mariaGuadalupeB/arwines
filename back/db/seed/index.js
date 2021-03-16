@@ -7,7 +7,6 @@ const products = require("./products");
 const categories = require("./categories");
 
 
-
 let bulkUsers = () => User.bulkCreate(users)
     .then(res => res);
 

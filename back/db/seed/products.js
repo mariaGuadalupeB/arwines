@@ -1,3 +1,6 @@
+
+const categories = require("./categories");
+
 function randomLink () {
   const names = [
     'https://frappe.com.ar/img/productos/1003552.png',
@@ -19,7 +22,6 @@ function randomLink () {
 
   return `${names[Math.floor(Math.random() * 13) + 1 ]}`
 }
-
 
 function nameGenerator () {
   const names = ['PAZ','LAGARDE', 'DON VALENTIN', 'RUTINI', 'LUIGI BOSCA', 'OASIS', 'MANOS NEGRAS', 'PORTILLO', 'SALENTEIN', 'BON VOYAGE']

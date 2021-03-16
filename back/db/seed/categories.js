@@ -15,7 +15,6 @@ module.exports = [
       description: `Vinos jóvenes, se distinguen por su mayor o menor dulzor.`,
 
     },
-
    
   ];
   

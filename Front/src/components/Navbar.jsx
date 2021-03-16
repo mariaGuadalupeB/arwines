@@ -3,8 +3,8 @@ import axios from "axios";
 import { Link, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 
-import { queryWines } from '../store/wines';
 import { userLogout } from "../store/user"
+import {resetCart_items} from "../store/cart"
 
 import Button from '@material-ui/core/Button';
 import styles from '../styles/navbar.module.css'
@@ -24,8 +24,6 @@ const Navbar = () => {
         const querySearch = string
         setQuery('');
         string.trim().length && history.push(`/search/${querySearch}`) 
-        //habilitar boyon si tiene contenido sino 
-        //si escribo cualquier cosa y no hay nada, no hay nada para buscar. 
     };    
 
     const logOutHandler = () => {
@@ -37,7 +35,9 @@ const Navbar = () => {
             .then(({data}) => data)
             
             localStorage.clear()
+            
             dispatch(userLogout())
+            dispatch(resetCart_items())
 
             history.push("/")
         }else{
@@ -55,6 +55,7 @@ const Navbar = () => {
                     </Link>
                     
                     <div style={{display: 'flex'}}>
+
                         <input 
                             type="text" 
                             placeholder="Busca productos marcas y mas..." 
@@ -65,11 +66,12 @@ const Navbar = () => {
                         <Button 
                             variant="outlined" 
                             color='primary' 
-                            style={{height: '2.7em', margin: '0.9em 0 0 0.4em'}} 
+                            style={{height: '2.7em', margin: '0.9em 0 0 0.4em', backgroundColor: '#38182F', color: 'white'}} 
                             onClick={() => handleQuery(query)}
                         >
                             Search
                         </Button>
+
                     </div>
 
                 </div>
@@ -77,7 +79,7 @@ const Navbar = () => {
                 <div className={styles.barraI}>
                     <div className={styles.botonLogIn}>
                         <div onClick={logOutHandler}>
-                            <Button variant="outlined" color='primary' >  { isLoggedIn ? "Log Out" : "Sign In" } </Button>
+                            <Button variant="outlined" color='primary'  style={{backgroundColor: '#38182F', color: 'white', textDecoration: 'underline'}}>  { isLoggedIn ? "Log Out" : "Sign In" } </Button>
                         </div>
                     </div>
                     
@@ -86,7 +88,7 @@ const Navbar = () => {
                             !isLoggedIn ? 
                             (
                                 <Link to="/register">
-                                    <Button variant="contained" color='primary'> Register</Button>
+                                    <Button variant="contained" style={{backgroundColor: '#38182F', color: 'white', textDecoration: 'underline'}}> Register</Button>
                                 </Link>
                             ) 
                             : 

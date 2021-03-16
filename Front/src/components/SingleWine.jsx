@@ -29,7 +29,6 @@ export default function SingleWine({match}) {
           if(cart_item.productId === selectedWine.id) {
             alreadyExisted = true
             cart_item.quantity += +quantity
-            console.log(cart_item, 'PREVCAR--T')
             }    
             return cart_item
         })

@@ -5,9 +5,12 @@ const Cart = require('../db/models/Cart');
 const helpers = {}
 
 helpers.categoryHelper = (categories) => {
-    const categoriesPromises = categories.map(category => Category.findOrCreate( { where: { name: category }}))
+    console.log(categories , `HELPER`)
+    if (categories) {
+        const categoriesPromises = categories.map(category => Category.findOrCreate( { where: { name: category }}))
 
-    return Promise.all(categoriesPromises).then(categories => categories.flat().filter(c => typeof c !== 'boolean'));
+        return Promise.all(categoriesPromises).then(categories => categories.flat().filter(c => typeof c !== 'boolean'));
+    }
 }
 helpers.firstCharToUpperCase = (str) =>{
     return str[0].toUpperCase() + str.slice(1)

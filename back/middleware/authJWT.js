@@ -10,8 +10,6 @@ const authJWT = (req, res, next) => {
     const token = req.headers.authorization.split(" ")[1];
     const data = jwt.verify(token, SECRET);
 
-
-
     if (data) {
         req.user = data;
         return next();
@@ -19,11 +17,3 @@ const authJWT = (req, res, next) => {
 };
 
 module.exports = authJWT;
-
-/*
-creas usuario -> token ({
-
-})
-
-
-*/

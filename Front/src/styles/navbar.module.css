@@ -1,13 +1,14 @@
 *{
     margin: 0;
+    z-index: 1;
   }
 .barraD{
-    background: #fff;
+    background: #A8C7B6;
     height: 64px;
     box-shadow: 0 1px 4px #a8a5a3;
     z-index: 1000;
     position: relative; 
-    padding: 0px 120px;
+    padding: 0 8em;
   }
   .barraD img {
     width: 86px;
@@ -24,11 +25,11 @@
     padding: 4px 0 4px 15px;
     border: 1px solid #dedede;
     transition: width .6s ease-in-out;
-    height: 40px;
+    height: 1.8em;
     background-color: #fff;
-    border-radius: 32px;
+    border-radius: 0.5em;
     width: 17em;
-    margin-top: 5px;
+    margin: 0.8em 0.4em 0 0;
   }
    .orden {
     display: flex;
@@ -39,7 +40,7 @@
   .barraI{
     display: flex;
     justify-content: flex-end;
-    margin-top: -35px;
+    margin-top: -38px;
   }
   .botonLogIn{
     margin-top: -8px;

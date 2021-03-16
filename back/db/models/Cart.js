@@ -15,10 +15,10 @@ Cart.init(
 			allowNull: false,
 			defaultValue: "active",
 		},
-		userId: {
-			type: S.INTEGER,
-			allowNull: false,
-		},
+		// userId: {
+		// 	type: S.INTEGER,
+		// 	allowNull: false,
+		// },
 	},
 
   { sequelize: db,

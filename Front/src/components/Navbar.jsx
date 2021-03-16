@@ -55,13 +55,13 @@ const Navbar = () => {
                     </Link>
                     <div style={{display: 'flex'}}>
                         <input type="text" placeholder="Busca productos marcas y mas..." value={query} onChange={e => setQuery(e.target.value)}/>
-                        <Button variant="outlined" color='primary' style={{height: '2.7em', margin: '0.9em 0 0 0.4em'}} onClick={() => handleQuery(query)}>Search</Button>
+                        <Button variant="outlined" color='primary' style={{height: '2.7em', margin: '0.9em 0 0 0.4em', backgroundColor: '#38182F', color: 'white'}} onClick={() => handleQuery(query)}>Search</Button>
                     </div>
                 </div>
                 <div className={styles.barraI}>
                     <div className={styles.botonLogIn}>
                         <div onClick={logOutHandler}>
-                            <Button variant="outlined" color='primary' >  { isLoggedIn ? "Log Out" : "Sign In" } </Button>
+                            <Button variant="outlined" color='primary'  style={{backgroundColor: '#38182F', color: 'white', textDecoration: 'underline'}}>  { isLoggedIn ? "Log Out" : "Sign In" } </Button>
                         </div>
                     </div>
                     
@@ -70,7 +70,7 @@ const Navbar = () => {
                             !isLoggedIn ? 
                             (
                                 <Link to="/register">
-                                    <Button variant="contained" color='primary'> Register</Button>
+                                    <Button variant="contained" style={{backgroundColor: '#38182F', color: 'white', textDecoration: 'underline'}}> Register</Button>
                                 </Link>
                             ) 
                             : 

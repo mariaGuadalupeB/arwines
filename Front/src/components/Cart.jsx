@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {saveCartItems, fetchCartItemsData} from "../store/cart"
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import style from "../styles/Products.module.css";
@@ -34,15 +35,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 const Cart = () => {
-  const cart = useSelector((state) => state.cart);
-  const [productsArr, setProductsArr] = React.useState([])
+  const cart_items = useSelector((state) => state.cart_items);
+  const [items, setItems] = useState([])
 
-  
-  React.useEffect(() => {
-    setProductsArr([])
-    const PromisesProducts = cart.map((cartItem) => {
+React.useEffect(() => {
+    console.log(cart_items, 'CART ITEMS EN STORE DESDE CART')
+    const promisesProducts = cart_items.map((cartItem) => {
       const id = cartItem.productId
       return axios.get(`http://localhost:5000/api/product/${id}`)
       .then(({ data }) => {
@@ -50,13 +49,10 @@ const Cart = () => {
         return data
       })
     })
+    Promise.all(promisesProducts).then(cartItems => setItems(cartItems))
+  },[])
+ 
 
-    Promise.all(PromisesProducts)
-    .then(cartItems => {
-      setProductsArr(cartItems)
-    })
-  }, []);
-  
   return (
     <div>
         <h1>CARRITO</h1><br />
@@ -64,7 +60,7 @@ const Cart = () => {
           Productos del carrito:
         </p>
       {
-        productsArr.length && productsArr.map((wine, i)=>
+        items.length && items.map((wine, i)=>
         (
           <div key={i}>
               <Link to={`/products/${wine.id}`} className={style.style}>
@@ -85,7 +81,7 @@ const Cart = () => {
       
       <h4>SUBTOTAL: 
         {
-        productsArr.length && productsArr.reduce((i, wine) => i+= wine.price * wine.quantity
+        items.length && items.reduce((i, wine) => i+= wine.price * wine.quantity
         ,0)
         }
 

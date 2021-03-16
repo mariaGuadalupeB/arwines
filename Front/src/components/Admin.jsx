@@ -38,46 +38,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = () => {
+const Admin = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
-
-  // const userCart_items = useSelector((state) => state.user.cart_items);
-  
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [error, setError] = React.useState("");
-  const [isLoading, setIsLoading] = React.useState(false);
-  
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsLoading(true)
-    
-    if (validateEmail(email) === false) {
-      return setError("Email invalido");
-    }
-    if (validatePassword(password) === false) {
-      return setError("Password invalido");
-    }
-    dispatch(sendLoginRequest({ email, password }))
-    .then(() => {
-      const cart_items = JSON.parse(localStorage.getItem("cart_items"))
-
-      dispatch(saveCartItems(cart_items))
-      setIsLoading(false)
-
-      history.push("/")
-    })
-  };
-
-  const changeEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const changePassword = (e) => {
-    setPassword(e.target.value);
-  };
 
   return (
     <div>
@@ -147,4 +111,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Admin;

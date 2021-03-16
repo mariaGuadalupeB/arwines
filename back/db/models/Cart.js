@@ -2,7 +2,7 @@ const db = require("../index");
 const { Model } = require("sequelize");
 const S = require("sequelize");
 
-const Cart_item = require("./Cart_item");
+// const Cart_item = require("./Cart_item");
 
 class Cart extends Model {
 
@@ -26,8 +26,8 @@ Cart.init(
    }
 );
 
-Cart.hasMany(Cart_item)
-Cart_item.belongsTo(Cart)
+// Cart.hasMany(Cart_item)
+// Cart_item.belongsTo(Cart)
 
 
 module.exports = Cart;

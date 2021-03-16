@@ -1,3 +1,6 @@
+
+const categories = require("./categories");
+
 function randomLink () {
   const names = [
     'https://frappe.com.ar/img/productos/1003552.png',
@@ -20,9 +23,8 @@ function randomLink () {
   return `${names[Math.floor(Math.random() * 13) + 1 ]}`
 }
 
-
 function nameGenerator () {
-  const names = ['PAZ','LAGARDE', 'DON VALENTIN', 'RUTINI', 'LUIGI BOSCA', 'OASIS', 'MANOS NEGRAS', 'PORTILLO', 'SALENTEIN']
+  const names = ['PAZ','LAGARDE', 'DON VALENTIN', 'RUTINI', 'LUIGI BOSCA', 'OASIS', 'MANOS NEGRAS', 'PORTILLO', 'SALENTEIN', 'BON VOYAGE']
   const types = ['MALBEC', 'ROSADO', 'BLANCO', 'PETIT NOIR', 'SYRAH', 'CABERNET SAUVIGNON', 'OTRO CABERNET', 'BLANCO BIEN SUAVE', 'HERMOSO', 'DELIZIA']
 
   return `${names[+Math.random(1).toString().split('.')[1][0]]} ${types[+Math.random(1).toString().split('.')[1][0]]}`
@@ -32,6 +34,7 @@ function weightGenerator () {
 }
 
 function randomCategory() {
+  
   const cats = [`oro verde`,`enjuague paladar`,`suave hito`]
   return [cats[Math.floor(Math.random() *2) +1]]
 }

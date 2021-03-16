@@ -1,5 +1,8 @@
-const Category = require('../db/models/Category');
-const Product = require('../db/models/Product');
+// const Category = require('../db/models/Category');
+// const Product = require('../db/models/Product');
+
+const {Category, Product} = require('../db/models')
+
 const helpers = require('../utils/helpers');
 
 const controller = {};

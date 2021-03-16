@@ -1,7 +1,9 @@
 
-const Cart = require("../db/models/Cart");
-const Product = require("../db/models/Product");
-const Cart_item = require("../db/models/Cart_item");
+// const Cart = require("../db/models/Cart");
+// const Product = require("../db/models/Product");
+// const Cart_item = require("../db/models/Cart_item");
+const {Cart, Product, Cart_item} = require('../db/models')
+
 const { Op } = require("sequelize");
 
 

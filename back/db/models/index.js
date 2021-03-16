@@ -13,15 +13,14 @@ const Review = require("./Review");
 Cart.belongsTo(User)
 User.hasMany(Cart);
 
-
 Product.hasMany(Cart_item)
 Cart_item.belongsTo(Product)
 
-Product.belongsToMany(Category, {through: 'prod_cats'})
-Category.belongsToMany(Product, {through: 'prod_cats'})
-
 Cart.hasMany(Cart_item)
 Cart_item.belongsTo(Cart)
+
+Product.belongsToMany(Category, {through: 'prod_cats'})
+Category.belongsToMany(Product, {through: 'prod_cats'})
 
 Review.belongsTo(Product)
 Product.hasMany(Review)

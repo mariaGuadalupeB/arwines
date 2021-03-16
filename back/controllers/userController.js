@@ -67,6 +67,13 @@ userController.getUser = (req, res, next) => {
     if(!data) res.sendStatus(404)
     })
 }
+userController.getAllUsers = (req, res, next) => {
+
+    User.findAll()
+    .then(data => {
+        res.status(200).send(data)
+    })
+}
 userController.deleteUser = (req, res, next) => {
     const {userId, isAdmin} = req.user
     if(isAdmin && userId !== userId) {

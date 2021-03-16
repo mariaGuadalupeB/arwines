@@ -30,4 +30,25 @@ cartController.saveCart = (req, res, next) => {
     })
 }
 
+cartController.setCartToPending = (req, res, next) => {
+    const userTokenId = req.user.userId
+    const cartItems = req.body // [{productId: id, quantity: cantidad}, {productId: id, quantity: cantidad}]
+
+    Cart.findOne({
+        where: {userId: userTokenId, status: "active"},
+        include: Cart_item
+    })
+    .then((cart) => {
+        const promises = cartItems.map(item=>{
+            const {productId, quantity} = item
+            return Cart_item.findOrCreate({
+                where: {productId, cartId: cart.id},
+                defaults: {productId, quantity, cartId: cart.id}
+            })
+            .then(cart_items => cart_items[0].update({quantity, cartId:cart.id}))
+        })
+        return Promise.all(promises).then(updatedCart=>res.status(200).send(updatedCart))
+    })
+}
+
 module.exports = cartController;

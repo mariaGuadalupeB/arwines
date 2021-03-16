@@ -1,17 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import style from "../styles/Products.module.css";
-import {useDispatch, useSelector} from 'react-redux';
 import {setWines} from '../store/wines';
+import {useSelector} from 'react-redux';
 
 export default () => {
-  const dispatch = useDispatch();
   const wines = useSelector(state => state.wines)
-
-  React.useEffect(() => {
-    dispatch(setWines())
-      .then(() => console.log('GOT WINES'))    
-  }, [])
 
   return (
     <div>

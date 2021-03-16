@@ -1,6 +1,9 @@
+import React from 'react';
 import { Switch, Route, BrowserRouter, useHistory } from "react-router-dom";
 import { Provider } from "react-redux";
-import "./App.css";
+import './App.css'
+import {setWines} from './store/wines';
+import {useDispatch, useSelector} from 'react-redux';
 
 // componentes
 import Login from "./components/Login";
@@ -9,24 +12,35 @@ import Cart from "./components/Cart";
 import Wines from "./components/Wines";
 import SingleWine from "./components/SingleWine";
 import Navbar from "./components/Navbar";
+import PanelAdmin from './components/panelAdmin/PanelAdmin';
 
 // store
 import store from "./store/store";
+import Home from './components/home/Home';
+
 
 function App() {
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(setWines())
+      .then(() => console.log('GOT WINES'))    
+  }, [])
+
   return (
     <div>
       <Provider store={store}>
         <BrowserRouter>
           <Navbar />
           <Switch>
-            <Route exact path="/" component={Wines} />
+            <Route exact path="/" component={Home} />
             <Route exact path="/products" component={Wines} />
             <Route
               exact
               path="/products/:id"
               render={({ match }) => <SingleWine match={match} />}
             />
+            <Route path='/admin' component={PanelAdmin} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/cart" component={Cart} />

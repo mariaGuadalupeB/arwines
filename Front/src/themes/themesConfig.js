@@ -1,5 +1,5 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-
+import { makeStyles } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
     palette: {
@@ -12,4 +12,16 @@ const theme = createMuiTheme({
     },
 });
 
+
 export default theme
+
+export const useStyles = makeStyles((theme) => ({
+    button: {
+        display: 'block',
+        marginTop: theme.spacing(2),
+    },
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 120,
+    },
+}));

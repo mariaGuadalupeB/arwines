@@ -46,7 +46,6 @@ function wineGenerator () {
     name,
     description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
     weight: weightGenerator(),
-    brand: name.split(' ')[0],
     quantity: weightGenerator(),
     image_path: randomLink(),
     price: weightGenerator(),

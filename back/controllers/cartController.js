@@ -75,11 +75,28 @@ cartController.checkOutCart = (req, res, next) => {
 
 };
 
-cartController.setCartToPending = (req, res, next) => {
-    const userTokenId = req.user.userId
-    const cartItems = req.body // [{productId: id, quantity: cantidad}, {productId: id, quantity: cantidad}]
+cartController.confirmCart = (req, res, next) => {
+  const {userId, isAdmin} = req.user
+  const userTokenId = req.user.userId
+  const {cartId} = req.params
 
-    
+  if(isAdmin) {
+    Cart.findByPk(cartId)
+    .then(cart=>cart.update({status: 'confirmed'}))
+    .then(cart=>res.status(200).send('carrito confirmado'))
+    }
+}
+
+cartController.rejectCart = (req, res, next) => {
+  const {userId, isAdmin} = req.user
+  const userTokenId = req.user.userId
+  const {cartId} = req.params
+  
+  if(isAdmin) {
+    Cart.findByPk(cartId)
+    .then(cart=>cart.update({status: 'confirmed'}))
+    .then(cart=>res.status(200).send('carrito confirmado'))
+  }
 }
 
 module.exports = cartController;

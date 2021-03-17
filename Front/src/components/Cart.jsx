@@ -2,13 +2,12 @@ import React, {useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {saveCartItems, fetchCartItemsData} from "../store/cart"
 import { useHistory } from "react-router";
+import Button from "@material-ui/core/Button"
 import { Link } from "react-router-dom";
+import axios from 'axios'
 import style from "../styles/Products.module.css";
-
-
-// MATERIAL UI
 import { makeStyles } from "@material-ui/core/styles";
-import axios from "axios";
+import { resetCart_items } from '../store/cart';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,9 +34,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 const Cart = () => {
+  const dispatch = useDispatch()
   const cart_items = useSelector((state) => state.cart_items);
+  const {token} = useSelector((state) => state.user);
   const [items, setItems] = useState([])
+
+
+
+  const checkOutCart = () => {
+    return axios
+      .post("http://localhost:5000/api/cart/", {cart_items, total}, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      .then(x=>console.log(1))
+      .then(()=>dispatch(resetCart_items()))
+      .then(()=>localStorage.setItem('cart_items', JSON.stringify([])) )
+  }
 
 React.useEffect(() => {
     console.log(cart_items, 'CART ITEMS EN STORE DESDE CART')
@@ -52,6 +66,11 @@ React.useEffect(() => {
     Promise.all(promisesProducts).then(cartItems => setItems(cartItems))
   },[])
  
+const total = items.reduce((i, wine) => i+= wine.price * wine.quantity
+,0)
+
+
+
   return (
     <div>
         <h1>CARRITO</h1><br />
@@ -80,11 +99,12 @@ React.useEffect(() => {
       
       <h4>SUBTOTAL: 
         {
-        items.length && items.reduce((i, wine) => i+= wine.price * wine.quantity
-        ,0)
+        items.length && total
         }
 
       </h4><br />
+      <Button variant="contained" color="primary" onClick={checkOutCart}>Confirmar compra</Button>
+
       
     </div>
   );

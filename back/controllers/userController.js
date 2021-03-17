@@ -2,7 +2,7 @@
 require('dotenv').config();
 const helpers = require('../utils/helpers')
 const {User, Cart,Cart_item} = require('../db/models')
-
+const { Op } = require("sequelize");
 // const User = require(`../db/models/User`);
 // const Cart = require(`../db/models/Cart`);
 
@@ -46,37 +46,51 @@ userController.login =  (req, res, next) => {
         })    
     })
 }
-userController.updateUser = (req, res, next) => {
+userController.changeRole = (req, res, next) => {
     const {userId, isAdmin} = req.user
     const idToUpdate = req.params.id
 
     if(isAdmin) {
-        if(userId === +idToUpdate && req.body.hasOwnProperty(`admin`)) res.status(400).send('You cant modify your own role!')
+        if(userId === +idToUpdate) res.status(400).send('You cant modify your own role!')
         else {
             User.findByPk(idToUpdate)
-            .then(user => user ? user.update(req.body) : res.sendStatus(404))
-            .then(user =>  res.status(200).send(user))
-            .catch(next)
+            .then(user => {
+                if(user) {
+                    const role = user.admin
+                    user.update({admin: !role}).then(user => res.status(200).send(user))
+
+                } else res.sendStatus(404)
+            })
         }
     }
     else res.status(403).send('No sufficient credentials')
 }
+
 userController.getUser = (req, res, next) => {
     User.findByPk(req.params.id)
     .then(data => {
     if(!data) res.sendStatus(404)
     })
 }
-userController.getAllUsers = (req, res, next) => {
 
-    User.findAll()
-    .then(data => {
-        res.status(200).send(data)
-    })
-}
-userController.deleteUser = (req, res, next) => {
+userController.getAllUsers = (req, res, next) => {
     const {userId, isAdmin} = req.user
-    if(isAdmin && userId !== userId) {
+    const idToUpdate = req.params.id
+
+    if(isAdmin) {
+        User.findAll({where: 
+            {id: 
+                {[Op.ne]: userId}}})
+        .then(data => {
+            res.status(200).send(data)
+        })
+    }
+}
+
+userController.deleteUser = (req, res, next) => {
+    console.log('hola')
+    const {userId, isAdmin} = req.user
+    if(isAdmin) {
         User.findByPk(req.params.id)
         .then(user => user ? user.destroy()
             .then(() => res.status(200).send('User was deleted')) : res.sendStatus(404))

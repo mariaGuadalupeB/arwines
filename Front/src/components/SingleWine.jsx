@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import style from "../styles/SingleProducts.module.css"
 import { useDispatch, useSelector } from 'react-redux';
@@ -33,80 +34,93 @@ export default function SingleWine({ match }) {
 
 
   const AddProduct = () => {
-
-        let alreadyExisted = false 
-        const updatedCart = items.map(cart_item=> {
-          if(cart_item.productId === selectedWine.id) {
-            alreadyExisted = true
-            cart_item.quantity += +quantity
-            }    
-            return cart_item
-        })
-
-        if(!alreadyExisted) updatedCart.push({
-            productId: selectedWine.id,
-            quantity: +quantity
-          })
-        localStorage.setItem("cart_items", JSON.stringify(updatedCart))
-    
-        dispatch(saveCartItems(updatedCart))
-        //   dispatch(saveCartItems({
-        //   productId: selectedWine.id,
-        //   quantity: +quantity
-        // }))  
-        history.push("/cart")  
+    let alreadyExisted = false
+    const updatedCart = items.map(cart_item => {
+      if (cart_item.productId === selectedWine.id) {
+        alreadyExisted = true
+        cart_item.quantity += +quantity
       }
+      return cart_item
+    })
 
-  
-  
-      return (
-        <div className='row'>
-          <Grid container>
-            <Grid xs={6}>
-              < div className={style.unico} >
-                <img src={selectedWine.image_path} />
-              </div>
-            </Grid>
-            <Grid xs={6}>
-              <div className={style.rowDerecha}>
-                <h1 className={style.tituloVino}>{selectedWine.name}</h1>
-                <div className={style.boxPrice}>
-                  <h3 className={style.precio}>Precio: $ {selectedWine.price}</h3>
-                </div>
-                <p className={style.description}>Descripcion: {selectedWine.description}</p>
-                <Link to="/"><Button variant="contained" color='primary' className={style.botonAtras}>Añadir al carrito</Button></Link>
-              </div>
-            </Grid>
-          </Grid>
-          <hr />
-    
-          <div>
+    if (!alreadyExisted) updatedCart.push({
+      productId: selectedWine.id,
+      quantity: +quantity
+    })
+    localStorage.setItem("cart_items", JSON.stringify(updatedCart))
+
+    dispatch(saveCartItems(updatedCart))
+    //   dispatch(saveCartItems({
+    //   productId: selectedWine.id,
+    //   quantity: +quantity
+    // }))  
+    history.push("/cart")
+  }
+
+
+
+  return (
+    <div className='row'>
+      <Grid container>
+        <Grid xs={6}>
+          < div className={style.unico} >
+            <img src={selectedWine.image_path} />
+          </div>
+        </Grid>
+        <Grid xs={6}>
+          <div className={style.rowDerecha}>
+            <h1 className={style.tituloVino}>{selectedWine.name}</h1>
+            <div className={style.boxPrice}>
+              <h3 className={style.precio}>Precio: $ {selectedWine.price}</h3>
+            </div>
+            <p className={style.description}>Descripcion: {selectedWine.description}</p>
 
             {
               isLoggedIn ?
                 (
                   <>
 
-                    <select name="quantity" onChange={(e) => setQuantity(e.target.value)}>
-                      <option value="">0</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                    </select>
-                    {
-                      quantity ?
 
-                        <Button variant="contained" color="primary" onClick={AddProduct} >AGREGAR</Button>
-                        :
-                        <Button variant="contained" color="primary" onClick={AddProduct} disabled >AGREGAR</Button>
-                    }
+                    <div className={style.quantity}>
+                      <span className={style.cantidad}>
+                        <FormControl className={useStyles.formControl}>
+                          <Select name="quantity" onChange={(e) => setQuantity(e.target.value)} className={style.cantidad} >
 
+                            {stock && stock.map((n) => {
+                              return <MenuItem value={n}>{n} {n > 1 ? 'unidades' : 'unidad'}</MenuItem>
+                            })
+                            }
+                          </Select>
+                        </FormControl>
+                        <p>{!quantity ? '' : '(' + selectedWine.quantity + ' disponibles)'}  </p>
+                      </span>
+
+                      <div className={style.botonCarro}>
+                        {
+                          quantity ?
+
+                            <Button variant="contained" color="primary" onClick={AddProduct} style={{ backgroundColor: 'rgb(90,57,139)', color: 'white' }} >Añadir al carrito</Button>
+                            :
+
+                            <Button variant="contained" color='primary' onClick={AddProduct} disabled >Añadir al carrito</Button>
+
+                        }
+                      </div>
+
+                    </div>
                   </>
                 )
                 :
                 null
             }
 
+
+
+
+
+          </div>
+        </Grid>
+      </Grid>
       <hr />
 
       <div>

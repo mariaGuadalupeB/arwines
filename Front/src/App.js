@@ -23,6 +23,7 @@ import Home from './components/home/Home';
 function App() {
   const dispatch = useDispatch();
 
+  // pensar una logica que no haga un pedido al back cada vez que ingreso al home
   React.useEffect(() => {
     dispatch(setWines())
       .then(() => console.log('GOT WINES'))    

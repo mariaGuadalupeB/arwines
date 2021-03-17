@@ -63,7 +63,7 @@ const Login = () => {
     dispatch(sendLoginRequest({ email, password }))
     .then(() => {
       const cart_items = JSON.parse(localStorage.getItem("cart_items"))
-
+      
       dispatch(saveCartItems(cart_items))
       setIsLoading(false)
 

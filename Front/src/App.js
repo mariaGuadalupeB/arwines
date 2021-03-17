@@ -37,6 +37,9 @@ function App() {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/products" component={Wines} />
+
+            <Route path="/search/:query"  render={({match}) => <Wines search={match}/> } />
+            
             <Route
               exact
               path="/products/:id"

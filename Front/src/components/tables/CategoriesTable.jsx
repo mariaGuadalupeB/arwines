@@ -81,7 +81,7 @@ const CategoriesTable = () => {
               </TableHead>
               <TableBody>
                 {categories.map((row) => (
-                  <StyledTableRow key={row.name}>
+                  <StyledTableRow key={row.id}>
                     <StyledTableCell align="right">{row.id}</StyledTableCell>
                     <StyledTableCell align="right">{row.name}</StyledTableCell>
                     <StyledTableCell align="left">{row.description}</StyledTableCell>

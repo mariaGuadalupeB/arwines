@@ -1,11 +1,26 @@
-const Category = require('../db/models/Category');
+const {Category} = require('../db/models')
+const { Op } = require("sequelize");
 
 controller = {};
 
 controller.getProductsByCategory = (req, res, next) => {
-    Category.findByPk(req.params.id)
+    const valueToSearch = req.params.id
+    if(isNaN(Number(valueToSearch))){
+        Category.findOne({
+            where: {
+                name: {
+                [Op.like]: valueToSearch +'%' 
+                }
+            }
+        })
+            .then(category => category ? category.getProducts().then(products => res.status(200).send(products)) : res.sendStatus(404))
+            .catch(next)     
+        
+    }else{
+        Category.findByPk(valueToSearch)
         .then(category => category ? category.getProducts().then(products => res.status(200).send(products)) : res.sendStatus(404))
-        .catch(next);
+        .catch(next);   
+    }
 };
 
 controller.getCategories = (req, res, next) => {

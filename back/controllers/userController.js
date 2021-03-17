@@ -54,7 +54,6 @@ userController.changeRole = (req, res, next) => {
         if(userId === +idToUpdate) res.status(400).send('You cant modify your own role!')
         else {
             User.findByPk(idToUpdate)
-<<<<<<< HEAD
             .then(user => {
                 if(user) {
                     const role = user.admin
@@ -62,11 +61,6 @@ userController.changeRole = (req, res, next) => {
 
                 } else res.sendStatus(404)
             })
-=======
-            .then(user => user ? user.update(req.body) : res.sendStatus(404))
-            .then(user =>  res.status(200).send(user))
-            .catch(next)
->>>>>>> 50121484624eb87467c618463c98b27b70369033
         }
     }
     else res.status(403).send('No sufficient credentials')

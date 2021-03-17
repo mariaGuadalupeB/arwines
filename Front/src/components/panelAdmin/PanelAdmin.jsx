@@ -8,7 +8,7 @@ import OrdersTable from '../tables/OrdersTable';
 
 const PanelAdmin = () => {
     const styles = useStyles();
-    const [tableHandler, setTableHandler] = React.useState({openProducts: false, openCategories: false, openUser: true})
+    const [tableHandler, setTableHandler] = React.useState({openProducts: false, openCategories: false, openUser: true, openOrders: false})
 
     const handleClick = tableToOpen => {
         for(let key in tableHandler) {

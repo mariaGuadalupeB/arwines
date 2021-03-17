@@ -108,8 +108,6 @@ export default function SingleWine({ match }) {
             }
 
       <hr />
-
-
       </div>
     </div >
 

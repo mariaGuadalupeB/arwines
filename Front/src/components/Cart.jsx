@@ -182,7 +182,7 @@ const Cart = () => {
                         <TableCell align="center">{wine.quantity}</TableCell>
                         <TableCell align="center">
                           <DeleteIcon
-                          onClick={()=> deleteProduct(wine.id)}
+                          // onClick={()=> deleteProduct(wine.id)}
                           ></DeleteIcon>
                         </TableCell>
                       </TableRow>

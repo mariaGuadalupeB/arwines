@@ -8,8 +8,7 @@ import { resetCart_items } from "../store/cart"
 
 import Button from "@material-ui/core/Button";
 import styles from "../styles/navbar.module.css";
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+
 
 const Navbar = () => {
 
@@ -56,7 +55,7 @@ const Navbar = () => {
 
 
     }
-  }
+
 
   return (
     <div className="barra">

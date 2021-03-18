@@ -5,12 +5,13 @@ const controller = {};
 
 
 controller.searchProducts = (req, res, next) => {
+
     const keys = Object.keys(req.query)
     let allResults = []
 
     if (keys.length > 0) {
         Category.findAll({
-            where: { name: { [Op.like]: '%' + req.query[keys[0]].toUpperCase() + '%' } }
+            where: { name: { [Op.like]: '%' + req.query[keys[0]].toUpperCase() + '%' } },
         })
             .then(categories => {
                 if (categories.length) {
@@ -18,7 +19,7 @@ controller.searchProducts = (req, res, next) => {
                 } 
             })
             .then((x) => {
-                allResults.push(x)
+                x && allResults.push(x)
                 
                 Product.findAll({
                     where: {
@@ -27,20 +28,21 @@ controller.searchProducts = (req, res, next) => {
                             { description: { [Op.like]: '%' + req.query[keys[0]] + '%'} },
                         ]
                     },
+                    raw:true
                 })
-                    .then(products => {
+                .then(products => {
+                    allResults.push(products)
+                    const arr = [] 
+                    allResults.flat().forEach( item => {
 
-                        allResults.push(products)
-                        const arr = [] 
-                        allResults.flat().forEach( item => {
-                            let ifExist = false
-                            
-                            arr.forEach( arrItem => {
-                                if(item.id == arrItem.id) ifExist = true
-                            })
-
-                            if(ifExist == false) arr.push(item)
+                        let ifExist = false
+                        if(ifExist == false) arr.push(item)
+                        
+                        arr.forEach( arrItem => {
+                            if(item.id == arrItem.id) ifExist = true
                         })
+                        
+                    })
 
                         return res.status(200).send(allResults.flat())
                     }

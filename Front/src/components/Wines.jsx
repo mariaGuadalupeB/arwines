@@ -10,7 +10,6 @@ import ErrorMsg from "./ErrorMsg";
 export default ({ search }) => {
   const dispatch = useDispatch();
   const wines = useSelector(state => state.wines)
-  console.log(wines);
 
   const request = () => {
     if (search) return dispatch(queryWines(search.params.query))

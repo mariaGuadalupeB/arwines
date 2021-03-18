@@ -1,0 +1,45 @@
+*{
+    box-sizing: border-box;
+}
+.backgroundColor{
+    background-color: #EDEDED;
+}
+.background{
+    width: 2330px;
+    height: 188px;
+    padding-right: 22px;
+    padding-left: 0;
+    margin-left: 518px;
+    color: rgb(6,1,0);
+}
+.background h1 {
+    margin-bottom: 13px;
+}
+.background p {
+    display: flex;
+    justify-content: center ;
+}
+.Li{
+    margin-right: 404px;
+    display: flex;
+    justify-content: center;
+}
+ul li {
+
+    margin-left: 356px;
+    font-size: 16px;
+    font-weight: 300;
+
+    /* justify-content: center; */
+}
+.linkFunciona {
+    display: block;
+ 
+    margin-left: -425px;
+}
+.liUno li {
+    padding-right: 174px;
+}
+.liDos li {
+    padding-right: 77px;
+}

@@ -69,25 +69,20 @@ const Cart = () => {
   const { token } = useSelector((state) => state.user);
   const [items, setItems] = useState([]);
   const classes = useStyles();
+  const history = useHistory()
 
   const checkOutCart = () => {
     return axios
-      .post(
-        "http://localhost:5000/api/cart/",
-        { cart_items, total },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
-      .then((x) => console.log(1))
-      .then(() => dispatch(resetCart_items()))
-      .then(() => localStorage.setItem("cart_items", JSON.stringify([])));
-  };
+      .post("http://localhost:5000/api/cart/", {cart_items, total}, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      .then(()=>dispatch(resetCart_items()))
+      .then(()=>localStorage.setItem('cart_items', JSON.stringify([])) )
+      .then(()=> history.push("/checkoutcart"))
+  }
 
-  const deleteProduct = (idWine) => {
-    console.log(idWine)
-    
-    // axios.delete(`http://localhost:5000/api/cart/${id}`)
+  const historyCart = () => {
+    history.push("/historycart")
   }
 
   React.useEffect(() => {
@@ -108,13 +103,26 @@ const Cart = () => {
 
   return (
     <div>
-      <Grid container xs={12}>
-        <Grid item xs={8}>
           <div className={classes.headerCart}>
-            <Typography variant="h4" component="h4">
-              {" "}
-              Shop Cart
-            </Typography>
+            <div style={{ width: "100%" }}>
+              <Box display="flex">
+                <Box flexGrow={1}>
+                  <Typography variant="h4" component="h4">
+                    {" "}
+                    Shop Cart
+                  </Typography>
+                </Box>
+                <Box p={1}>
+                <Button
+                    variant="outlined"
+                    color="primary"
+                    onClick={historyCart}
+                  >
+                    Ver historial de compra
+                  </Button>
+                </Box>
+              </Box>
+            </div>
           </div>
 
           <div className={classes.headerCart}>
@@ -129,7 +137,7 @@ const Cart = () => {
                 <Box p={1}>
                   <Typography variant="h5" component="h5">
                     {" "}
-                    Subtotal: ${items.length && total}
+                    Total: ${items.length && total}
                   </Typography>
                 </Box>
               </Box>
@@ -148,7 +156,7 @@ const Cart = () => {
                     <TableCell align="center">Producto</TableCell>
                     {<TableCell align="right"></TableCell>}
                     <TableCell align="center">Precio:</TableCell>
-                    <TableCell align="center">Cantidad pedida:</TableCell>
+                    <TableCell align="center">Cantidad:</TableCell>
                     <TableCell align="center"></TableCell>
                   </TableRow>
                 </TableHead>
@@ -174,7 +182,7 @@ const Cart = () => {
                         <TableCell align="center">{wine.quantity}</TableCell>
                         <TableCell align="center">
                           <DeleteIcon
-                          onClick={()=>deleteProduct(wine.id)}
+                          onClick={()=> deleteProduct(wine.id)}
                           ></DeleteIcon>
                         </TableCell>
                       </TableRow>
@@ -200,18 +208,6 @@ const Cart = () => {
               </Box>
             </div>
           </div>
-        </Grid>
-        <Grid item xs={4} className={classes.history} >
-          <Paper elevation={0} className={classes.paper}>
-        <Typography variant="h5" component="h5">
-                    {" "}
-                    Historial de compras
-                  </Typography>
-
-          </Paper>
-        </Grid>
-
-      </Grid>
     </div>
   );
 };

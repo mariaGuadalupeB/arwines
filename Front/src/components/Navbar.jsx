@@ -3,8 +3,8 @@ import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { userLogout } from "../store/user";
-import { resetCart_items } from "../store/cart";
+import { userLogout } from "../store/user"
+import { resetCart_items } from "../store/cart"
 
 import Button from "@material-ui/core/Button";
 import styles from "../styles/navbar.module.css";
@@ -12,47 +12,49 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
 const Navbar = () => {
-  const history = useHistory();
-  const dispatch = useDispatch();
 
-  const user = useSelector((state) => state.user);
-  const cart_items = useSelector((state) => state.cart_items);
-  const [query, setQuery] = React.useState("");
+    const history = useHistory()
+    const dispatch = useDispatch();
 
+    const user = useSelector((state) => state.user)
+    const cart_items = useSelector((state) => state.cart_items)
+    const [query, setQuery] = React.useState('');
 
+    const isLoggedIn = Object.keys(user).length
 
-  const isLoggedIn = Object.keys(user).length;
+    const handleQuery = string => {
+        const querySearch = string
+        setQuery('');
+        string.trim().length && history.push(`/search/${querySearch}`)
+    };
 
-  const handleQuery = (string) => {
-    const querySearch = string;
-    setQuery("");
-    string.trim().length && history.push(`/search/${querySearch}`);
-  };
-
-  const logOutHandler = () => {
-    if (isLoggedIn) {
-      const token = user.token;
-      axios
-        .put("http://localhost:5000/api/cart", cart_items, {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        .then(({ data }) => data);
-
-      localStorage.clear();
-
-      dispatch(userLogout());
-      dispatch(resetCart_items());
-
-      history.push("/");
-    } else {
-      history.push("/login");
+    const handleChange = e => {
+      const key = e.keyCode
+      
+      if (key === 13) {
+        return handleQuery(query);
+      }
     }
-  };
+  
+  
+    const logOutHandler = () => {
+        if (isLoggedIn) {
+            const token = user.token
+            axios.put("http://localhost:5000/api/cart", cart_items, {
+                headers: { Authorization: `Bearer ${token}` }
+            })
+            .then(({data}) => data)
 
-  function handleChange(e) {
-    const key = e.keyCode;
-    if (key === 13) {
-      return handleQuery(query);
+            dispatch(userLogout())
+            dispatch(resetCart_items())
+
+            history.push("/")
+        } else {
+            history.push("/login")
+
+        }  
+
+
     }
   }
 
@@ -109,63 +111,46 @@ const Navbar = () => {
 
 
           </div>
+  
         </div>
-
+        
         <div className={styles.barraI}>
-          <div className={styles.botonLogIn}>
-            <div onClick={logOutHandler}>
-              <Button
-                variant="outlined"
-                color="primary"
-                style={{
-                  backgroundColor: "#38182F",
-                  color: "white",
-                  textDecoration: "underline",
-                }}
-              >
-                {" "}
-                {isLoggedIn ? "Log Out" : "Sign In"}{" "}
-              </Button>
-            </div>
-          </div>
-
-          <div className={styles.botonLogOut}>
-            {!isLoggedIn ? (
-              <Link to="/register">
-                <Button
-                  variant="contained"
-                  style={{
-                    backgroundColor: "#38182F",
-                    color: "white",
-                    textDecoration: "underline",
-                  }}
-                >
-                  {" "}
-                  Register
-                </Button>
-              </Link>
-            ) : (
-              <div className={styles.carrito}>
-                <Link to="/cart">
-                  <span className="material-icons">shopping_cart</span>
-                </Link>
-              </div>
-            )}
-          </div>
-        </div>
+                    <div className={styles.botonLogIn}>
+                        <div onClick={logOutHandler}>
+                            <Button variant="outlined" color='primary'  style={{backgroundColor: '#38182F', color: 'white', textDecoration: 'underline'}}>  { isLoggedIn ? "Log Out" : "Sign In" } </Button>
+                        </div>
+                    </div>
+                    
+                    <div className={styles.botonLogOut}>
+                        {
+                            !isLoggedIn ? 
+                            (
+                                <Link to="/register">
+                                    <Button variant="contained" style={{backgroundColor: '#38182F', color: 'white', textDecoration: 'underline'}}>Register</Button>
+                                </Link>
+                            ) 
+                            : 
+                            (
+                            <div className={styles.carrito}>
+                                {user.admin ? 
+                                <Link to="/admin">
+                                     <Button variant="contained" style={{backgroundColor: '#38182F', color: 'white', textDecoration: 'underline'}}>ADMIN</Button>
+                                </Link>
+                                 :
+                                <Link to='/cart'><span className="material-icons">shopping_cart</span></Link> 
+                                }
+                            </div>
+                            )
+                                    
+                        }
+                   </div>
+          </div>    
       </div>
     </div>
   );
+
 };
-export default Navbar;
 
 
-
-
-
-
-
-
-
-
+export default Navbar; 
 

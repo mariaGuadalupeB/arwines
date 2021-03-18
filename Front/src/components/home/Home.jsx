@@ -1,13 +1,22 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {AppBar, Button, Toolbar, Divider} from '@material-ui/core';
 import useStyles from './HomeStyles';
 import GalleryContainer from '../../containers/GalleryContainer';
 import Footer from '../footer/Footer';
+import {setWines} from '../../store/wines';
 import {Link as ScrollLink} from 'react-scroll';
 
 const Home = () => {
     const styles = useStyles();
+    const dispatch = useDispatch();
+
+    // pensar una logica que no haga un pedido al back cada vez que ingreso al home
+    React.useEffect(() => {
+        dispatch(setWines())
+        .then(() => console.log('GOT WINES'))    
+    }, [])
+
 
     return (
         <div className={styles.container}>

@@ -33,9 +33,7 @@ const Navbar = () => {
                 headers: { Authorization: `Bearer ${token}` }
             })
             .then(({data}) => data)
-            
-            localStorage.clear()
-            
+
             dispatch(userLogout())
             dispatch(resetCart_items())
 
@@ -99,12 +97,13 @@ const Navbar = () => {
                                      <Button variant="contained" style={{backgroundColor: '#38182F', color: 'white', textDecoration: 'underline'}}>ADMIN</Button>
                                 </Link>
                                  :
-                                <Link to='/cart'><span className="material-icons">shopping_cart</span></Link> 
+                                 null
                                 }
                             </div>
                             )
-                                    
+                            
                         }
+                        <Link to='/cart'><span className="material-icons">shopping_cart</span></Link> 
                     </div>
                     
                 </div>

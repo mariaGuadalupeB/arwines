@@ -48,13 +48,11 @@ const Cart = () => {
       .post("http://localhost:5000/api/cart/", {cart_items, total}, {
         headers: { Authorization: `Bearer ${token}` }
       })
-      .then(x=>console.log(1))
       .then(()=>dispatch(resetCart_items()))
       .then(()=>localStorage.setItem('cart_items', JSON.stringify([])) )
   }
 
 React.useEffect(() => {
-    console.log(cart_items, 'CART ITEMS EN STORE DESDE CART')
     const promisesProducts = cart_items.map((cartItem) => {
       const id = cartItem.productId
       return axios.get(`http://localhost:5000/api/product/${id}`)

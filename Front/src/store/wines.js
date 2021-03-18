@@ -8,17 +8,7 @@ export const setWines = createAsyncThunk('SET_WINES', () => {
 })
 
 export const queryWines = createAsyncThunk('QUERY_WINES', string => {
-  const categoryPromise = axios.get(`${baseUrl}/category/${string}/products`).then(res => res.data).catch(err => err)
-  //catcherar esto para no caiga elp primise ;
-  const productPromise = axios.get(`${baseUrl}/product?name=${string}`).then(res => res.data).catch(err => err);
-  
-  return Promise.any([categoryPromise, productPromise])
-  //.catch( para recibier el errror )
-  // finally
-
-  
-
-  
+  return axios.get(`${baseUrl}/search?name=${string}`).then(res => res.data).catch(err => err);
 });
 
 const winesReducer = createReducer({}, {

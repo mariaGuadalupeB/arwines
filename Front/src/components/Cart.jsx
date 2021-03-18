@@ -80,13 +80,15 @@ const Cart = () => {
       .then(()=>localStorage.setItem('cart_items', JSON.stringify([])) )
   }
 
-React.useEffect(() => {
-
   const deleteProduct = (idWine) => {
     console.log(idWine)
     
     // axios.delete(`http://localhost:5000/api/cart/${id}`)
   }
+
+React.useEffect(() => {
+
+
 
 
     const promisesProducts = cart_items.map((cartItem) => {
@@ -171,7 +173,7 @@ React.useEffect(() => {
                         <TableCell align="center">{wine.quantity}</TableCell>
                         <TableCell align="center">
                           <DeleteIcon
-                          onClick={()=>deleteProduct(wine.id)}
+                          onClick={()=> deleteProduct(wine.id)}
                           ></DeleteIcon>
                         </TableCell>
                       </TableRow>

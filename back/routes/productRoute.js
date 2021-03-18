@@ -5,8 +5,7 @@ const isQuery = require('../middleware/query')
 
 
 router.get('/:id', productController.getProductById);
-// router.get('/', isQuery, productController.getProducts);
-router.get('/', productController.getProductByDescription)
+router.get('/', isQuery, productController.getProducts);
 
 router.put('/:id', authJWT, productController.updateProduct);
 

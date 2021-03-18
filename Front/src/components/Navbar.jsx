@@ -8,6 +8,8 @@ import { resetCart_items } from "../store/cart";
 
 import Button from "@material-ui/core/Button";
 import styles from "../styles/navbar.module.css";
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 const Navbar = () => {
   const history = useHistory();
@@ -16,6 +18,8 @@ const Navbar = () => {
   const user = useSelector((state) => state.user);
   const cart_items = useSelector((state) => state.cart_items);
   const [query, setQuery] = React.useState("");
+
+
 
   const isLoggedIn = Object.keys(user).length;
 
@@ -71,6 +75,7 @@ const Navbar = () => {
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={(e) => handleChange(e)}
             />
+
             {query ? (
               <Button
                 variant="outlined"
@@ -102,7 +107,7 @@ const Navbar = () => {
               </Button>
             )}
 
-          
+
           </div>
         </div>
 
@@ -152,4 +157,15 @@ const Navbar = () => {
     </div>
   );
 };
-export default Navbar; 
+export default Navbar;
+
+
+
+
+
+
+
+
+
+
+

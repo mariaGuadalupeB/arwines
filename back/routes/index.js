@@ -16,7 +16,6 @@ router.use('/admin', userRoute);
 router.use('/category', categoryRoute);
 
 router.use('/review', reviewRoute);
-router.use('/cartItem', cartItemRoute)
 router.use('/search', searchRoute)
 
 

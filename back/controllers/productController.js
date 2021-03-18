@@ -1,5 +1,6 @@
-const {Category, Product} = require('../db/models')
+const {Category, Product, Review, User} = require('../db/models')
 const { Op } = require("sequelize");
+
 const helpers = require('../utils/helpers');
 
 const controller = {};

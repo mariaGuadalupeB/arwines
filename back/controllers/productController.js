@@ -1,8 +1,5 @@
-// const Category = require('../db/models/Category');
-// const Product = require('../db/models/Product');
-
 const {Category, Product} = require('../db/models')
-
+const { Op } = require("sequelize");
 const helpers = require('../utils/helpers');
 
 const controller = {};
@@ -19,6 +16,50 @@ controller.getProductById = (req, res, next) => {
         .then(product => product ? res.status(200).send(product) : res.sendStatus(404))
         .catch(next);
 };
+
+controller.getProductByDescription = (req, res, next) => {
+    const keys = Object.keys(req.query)
+    let allResults = []
+
+    if(keys.length > 0) {
+        Product.findAll({ 
+            where: { 
+                
+                [Op.or] : [
+                    {[keys[0]]: {
+                        [Op.like]: '%'+ req.query[keys[0]].toUpperCase() + '%'
+                    }},
+                    {description: {
+                        [Op.like]: '%'+ req.query[keys[0]] + '%'
+                    }}
+                ]
+            },
+            include: Category
+        })
+        .then(products => 
+            products.map(wine => {
+                allResults.push(wine.dataValues)
+            })
+        )
+        .catch(next);
+        
+
+        Category.findAll({ 
+            where: { 
+                name: {
+                    [Op.like]: '%'+ req.query[keys[0]].toUpperCase() + '%'       
+                }
+            }
+        })
+        .then(categories => {
+            Products.get
+            console.log(categories[0].dataValues.id)
+            console.log(allResults)
+        })
+        .catch(next);
+    } 
+}
+
 
 controller.updateProduct = (req, res, next) => {
     const {userId, isAdmin} = req.user

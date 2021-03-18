@@ -5,6 +5,8 @@ const User = require('../models/User')
 const users = require("./users");
 const products = require("./products");
 const categories = require("./categories");
+const prod_cats = require("./prod_cat")
+const { findOne } = require('../models/Product');
 
 
 let bulkUsers = () => User.bulkCreate(users)
@@ -23,3 +25,7 @@ Promise.all([bulkUsers(), bulkCategories(), bulkProducts()]).then(x=>{
   console.log('base de datos seedeada OK')
   return x
 })
+
+
+
+  

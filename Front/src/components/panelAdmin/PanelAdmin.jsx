@@ -5,8 +5,12 @@ import CategoriesTable from '../tables/CategoriesTable';
 import ProductsTable from '../tables/ProductsTable';
 import useStyles from "./PanelAdminStyles";
 import OrdersTable from '../tables/OrdersTable';
+import {useHistory} from 'react-router-dom';
+import {useSelector} from 'react-redux';
 
 const PanelAdmin = () => {
+    const user = useSelector(state => state.user)
+    const history = useHistory();
     const styles = useStyles();
     const [tableHandler, setTableHandler] = React.useState({openProducts: false, openCategories: false, openUser: true, openOrders: false})
 
@@ -22,6 +26,7 @@ const PanelAdmin = () => {
 
     return (
         <div className={styles.container}>
+            {!user || !user.admin ? history.push('/'): ''}
             <Drawer variant='permanent' classes={{paper: styles.drawer}}>
                 <List className={styles.list}>
                     <ListItem button onClick={() => handleClick('openUser')}>

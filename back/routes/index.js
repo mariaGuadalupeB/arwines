@@ -5,7 +5,6 @@ const cartRoute = require('./cartRoute');
 const categoryRoute = require('./categoryRoute');
 
 const reviewRoute = require('./reviewRoute');
-const cartItemRoute = require('./cart_itemRoute')
 const searchRoute = require('./searchRoute')
 
 

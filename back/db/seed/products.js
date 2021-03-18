@@ -47,11 +47,9 @@ function wineGenerator () {
     name,
     description: randomDescription(),
     weight: "750cc",
-    brand: name.split(' ')[0],
     quantity: weightGenerator(),
     image_path: randomLink(),
     price: weightGenerator(),
-    categories
   }
 }
 

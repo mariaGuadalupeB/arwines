@@ -3,11 +3,10 @@ import {makeStyles} from '@material-ui/core';
 const useStyles = makeStyles(theme => ({
     drawer: {
         width: '10em',
-        backgroundColor: '#38182F',
-        color: '#F7F7FF',
-        paddingTop: '4em',
-        position: 'sticky',
-        height: '55em'
+        backgroundColor: '#F7F7FF',
+        color: 'black',
+        position: 'relative',
+        height: 'auto'
     },
     container: {
         display: 'flex',

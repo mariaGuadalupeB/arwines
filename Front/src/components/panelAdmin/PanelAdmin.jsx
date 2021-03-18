@@ -4,10 +4,11 @@ import UserTable from '../tables/UserTable';
 import CategoriesTable from '../tables/CategoriesTable';
 import ProductsTable from '../tables/ProductsTable';
 import useStyles from "./PanelAdminStyles";
+import OrdersTable from '../tables/OrdersTable';
 
 const PanelAdmin = () => {
     const styles = useStyles();
-    const [tableHandler, setTableHandler] = React.useState({openProducts: false, openCategories: false, openUser: true})
+    const [tableHandler, setTableHandler] = React.useState({openProducts: false, openCategories: false, openUser: true, openOrders: false})
 
     const handleClick = tableToOpen => {
         for(let key in tableHandler) {
@@ -35,7 +36,7 @@ const PanelAdmin = () => {
                         <Typography variant="h6" color="initial">CATEGORIES</Typography>
                     </ListItem>
                     <Divider className={styles.divider}/>
-                    <ListItem button>
+                    <ListItem button onClick={() => handleClick('openOrders')}>
                         <Typography variant="h6" color="initial">ORDERS</Typography>
                     </ListItem>
                 </List>
@@ -43,6 +44,7 @@ const PanelAdmin = () => {
             { tableHandler.openUser ? <UserTable/> : '' }
             { tableHandler.openProducts ? <ProductsTable/> : '' }
             { tableHandler.openCategories ? <CategoriesTable/> : '' }
+            { tableHandler.openOrders ? <OrdersTable /> : '' }
         </div>
     )
 }

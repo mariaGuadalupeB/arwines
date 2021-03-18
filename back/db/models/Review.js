@@ -15,6 +15,10 @@ Review.init(
 			type: S.STRING,
 			allowNull: false,
 		},
+		rating: {
+			type: S.INTEGER,
+			allowNull: false
+		}
 	},
 
   { sequelize: db,

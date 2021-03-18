@@ -1,9 +1,9 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { sendRegisterRequest } from "../store/user";
 import { validateEmail, validatePassword } from "../utils/validations"
-
+import { saveCartItems } from "../store/cart";
 // MATERIAL UI
 import Button from "@material-ui/core/Button"
 import TextField from "@material-ui/core/TextField";
@@ -46,6 +46,8 @@ const Register = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [error, setError] = React.useState("");
+  const unloggedCart_items = useSelector(state=>state.cart_items)
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -56,8 +58,13 @@ const Register = () => {
       return setError("Credenciales invalidas")
     } 
     
-    dispatch(sendRegisterRequest({ firstName, lastName, email, password }));
-    history.push("/");
+    dispatch(sendRegisterRequest({ firstName, lastName, email, password, unloggedCart_items}))
+    .then(()=> {
+
+      const cart_items = JSON.parse(localStorage.getItem("cart_items"))
+      dispatch(saveCartItems(cart_items))
+      history.push("/");
+    })
   };
 
   const changeFirstName = (e) => {

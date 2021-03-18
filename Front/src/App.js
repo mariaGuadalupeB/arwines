@@ -14,6 +14,7 @@ import Wines from "./components/Wines";
 import SingleWine from "./components/SingleWine";
 import Navbar from "./components/Navbar";
 import PanelAdmin from './components/panelAdmin/PanelAdmin';
+import HistoryCart from './components/HistoryCart'
 
 // store
 import store from "./store/store";
@@ -49,6 +50,7 @@ function App() {
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/cart" component={Cart} />
+            <Route exact path="/historycart" component={HistoryCart} />
           </Switch>
         </BrowserRouter>
       </Provider>

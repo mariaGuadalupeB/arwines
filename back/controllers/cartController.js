@@ -115,9 +115,19 @@ cartController.rejectCart = (req, res, next) => {
 }
 
 cartController.getCarts = (req, res, next) => {
-  Cart.findAll()
-    .then(carts => res.status(200).send(carts))
+  const userTokenId = req.user.userId;
+  
+  Cart.findAll({
+    where: {[Op.or]:[{status: "pending"}, {status: "confirmed"}, {status: "rejected"}], userId: userTokenId},
+    include: {model: Cart_item, include: Product},
+    raw: true
+   })
+   .then(userCart=>{
+      res.status(200).send(userCart)
+   })
     .catch(next);
 }
 
 module.exports = cartController;
+
+

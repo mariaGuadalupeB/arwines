@@ -35,7 +35,6 @@ export default function SingleWine({ match }) {
   }, []);
 
   const AddProduct = () => {
-
     let alreadyExisted = false
     const updatedCart = items.map(cart_item => {
       if (cart_item.productId === selectedWine.id) {
@@ -70,7 +69,6 @@ export default function SingleWine({ match }) {
             <div className={style.boxPrice}>
               <h3 className={style.precio}>Precio: $ {selectedWine.price}</h3>
             </div>
-
             <p className={style.description}>Descripcion: {selectedWine.description}</p>
 
             {/* {

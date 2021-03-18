@@ -105,49 +105,38 @@ const Navbar = () => {
           
           </div>
         </div>
-
+        
         <div className={styles.barraI}>
-          <div className={styles.botonLogIn}>
-            <div onClick={logOutHandler}>
-              <Button
-                variant="outlined"
-                color="primary"
-                style={{
-                  backgroundColor: "#38182F",
-                  color: "white",
-                  textDecoration: "underline",
-                }}
-              >
-                {" "}
-                {isLoggedIn ? "Log Out" : "Sign In"}{" "}
-              </Button>
-            </div>
-          </div>
-
-          <div className={styles.botonLogOut}>
-            {!isLoggedIn ? (
-              <Link to="/register">
-                <Button
-                  variant="contained"
-                  style={{
-                    backgroundColor: "#38182F",
-                    color: "white",
-                    textDecoration: "underline",
-                  }}
-                >
-                  {" "}
-                  Register
-                </Button>
-              </Link>
-            ) : (
-              <div className={styles.carrito}>
-                <Link to="/cart">
-                  <span className="material-icons">shopping_cart</span>
-                </Link>
-              </div>
-            )}
-          </div>
-        </div>
+                    <div className={styles.botonLogIn}>
+                        <div onClick={logOutHandler}>
+                            <Button variant="outlined" color='primary'  style={{backgroundColor: '#38182F', color: 'white', textDecoration: 'underline'}}>  { isLoggedIn ? "Log Out" : "Sign In" } </Button>
+                        </div>
+                    </div>
+                    
+                    <div className={styles.botonLogOut}>
+                        {
+                            !isLoggedIn ? 
+                            (
+                                <Link to="/register">
+                                    <Button variant="contained" style={{backgroundColor: '#38182F', color: 'white', textDecoration: 'underline'}}>Register</Button>
+                                </Link>
+                            ) 
+                            : 
+                            (
+                            <div className={styles.carrito}>
+                                {user.admin ? 
+                                <Link to="/admin">
+                                     <Button variant="contained" style={{backgroundColor: '#38182F', color: 'white', textDecoration: 'underline'}}>ADMIN</Button>
+                                </Link>
+                                 :
+                                <Link to='/cart'><span className="material-icons">shopping_cart</span></Link> 
+                                }
+                            </div>
+                            )
+                                    
+                        }
+                   </div>
+          </div>    
       </div>
     </div>
   );

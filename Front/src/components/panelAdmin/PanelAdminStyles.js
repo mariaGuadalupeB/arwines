@@ -6,7 +6,7 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: '#F7F7FF',
         color: 'black',
         position: 'relative',
-        height: '75rem'
+        height: 'auto'
     },
     container: {
         display: 'flex',

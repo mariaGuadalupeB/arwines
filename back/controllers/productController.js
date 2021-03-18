@@ -1,7 +1,7 @@
 // const Category = require('../db/models/Category');
 // const Product = require('../db/models/Product');
 
-const {Category, Product} = require('../db/models')
+const {Category, Product, Review, User} = require('../db/models')
 
 const helpers = require('../utils/helpers');
 
@@ -15,7 +15,7 @@ controller.getProducts = (req, res, next) => {
 };
 
 controller.getProductById = (req, res, next) => {
-    Product.findByPk(req.params.id, { include: Category })
+    Product.findByPk(req.params.id, { include: [Category, {model: Review, include: User}] })
         .then(product => product ? res.status(200).send(product) : res.sendStatus(404))
         .catch(next);
 };

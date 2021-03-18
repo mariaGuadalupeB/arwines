@@ -1,11 +1,11 @@
 
 import React, { useState } from "react";
-import style from "../styles/SingleProducts.module.css"
-import { useDispatch, useSelector } from 'react-redux';
-import wineReducer, { setWine } from '../store/wine';
-import { Link } from 'react-router-dom'
-import { saveCartItems } from '../store/cart'
-import { Button, Box, Grid } from "@material-ui/core"
+import style from "../styles/SingleProducts.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import wineReducer, { setWine } from "../store/wine";
+import { Link } from "react-router-dom";
+import { saveCartItems } from "../store/cart";
+import { Button, Box, Grid } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -16,26 +16,25 @@ import Stars from "./productsReviews/Stars";
 
 export default function SingleWine({ match }) {
   const dispatch = useDispatch();
-  const selectedWine = useSelector(state => state.selectedWine)
-  const user = useSelector((state) => state.user)
-  const isLoggedIn = Object.keys(user).length
-  const [quantity, setQuantity] = useState(0)
+  const selectedWine = useSelector((state) => state.selectedWine);
+  const user = useSelector((state) => state.user);
+  const isLoggedIn = Object.keys(user).length;
+  const [quantity, setQuantity] = useState(0);
   const history = useHistory();
-  const itmz = JSON.parse(localStorage.getItem("cart_items"))
-  const [items, setItems] = useState(itmz)
-  const [stock, setStock] = useState([])
+  const itmz = JSON.parse(localStorage.getItem("cart_items"));
+  const [items, setItems] = useState(itmz);
+  const [stock, setStock] = useState([]);
 
   React.useEffect(() => {
-    dispatch(setWine(parseInt(match.params.id)))
-      .then((wine) => {
-        const value = wine.payload.quantity > 6 ? 6 : wine.payload.quantity
+    dispatch(setWine(parseInt(match.params.id))).then((wine) => {
+      const value = wine.payload.quantity > 6 ? 6 : wine.payload.quantity;
 
-        setStock(Array.from({ length: value }, (_, i) => i + 1))
-      });
-  }, [])
-
+      setStock(Array.from({ length: value }, (_, i) => i + 1));
+    });
+  }, []);
 
   const AddProduct = () => {
+
     let alreadyExisted = false
     const updatedCart = items.map(cart_item => {
       if (cart_item.productId === selectedWine.id) {
@@ -74,6 +73,7 @@ export default function SingleWine({ match }) {
             <div className={style.boxPrice}>
               <h3 className={style.precio}>Precio: $ {selectedWine.price}</h3>
             </div>
+
             <p className={style.description}>Descripcion: {selectedWine.description}</p>
 
             {
@@ -114,10 +114,6 @@ export default function SingleWine({ match }) {
                 :
                 null
             }
-
-
-
-
 
           </div>
         </Grid>

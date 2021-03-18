@@ -31,7 +31,7 @@ userController.register = (req, res, next) => {
             cart_items = helpers.mergeArrayOfObjects(all_items)
             
             return res.status(200).send({user: { token, id, email, firstName, admin, cart_items }}) 
-        })    
+        })
     })
     .catch(next);
 } 

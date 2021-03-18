@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { saveCartItems } from "../store/cart";
 import { Button, Box, Grid } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
+
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -115,6 +116,7 @@ export default function SingleWine({ match }) {
         </Grid>
       </Grid>
       <hr />
+
       {selectedWine.reviews && selectedWine.reviews.length ? <ReviewsList reviews={selectedWine.reviews}/> : null }
       
     </div >

@@ -7,10 +7,12 @@ import { Link } from "react-router-dom";
 import { saveCartItems } from "../store/cart";
 import { Button, Box, Grid } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import { useStyles } from "../themes/themesConfig";
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import { useStyles } from '../themes/themesConfig'
+import ReviewsList from "./productsReviews/ReviewsList";
+import Stars from "./productsReviews/Stars";
 
 export default function SingleWine({ match }) {
   const dispatch = useDispatch();
@@ -52,19 +54,18 @@ export default function SingleWine({ match }) {
     history.push("/cart")
   }
 
-
-
   return (
     <div className='row'>
       <Grid container>
-        <Grid xs={6}>
+        <Grid item xs={6}>
           < div className={style.unico} >
             <img src={selectedWine.image_path} />
           </div>
         </Grid>
-        <Grid xs={6}>
+        <Grid item xs={6}>
           <div className={style.rowDerecha}>
             <h1 className={style.tituloVino}>{selectedWine.name}</h1>
+            {selectedWine.reviews && selectedWine.reviews.length ? <Stars number={Math.ceil(selectedWine.reviews.reduce((acc, ele) => acc += ele.rating , 0)/selectedWine.reviews.length)}/> : null }
             <div className={style.boxPrice}>
               <h3 className={style.precio}>Precio: $ {selectedWine.price}</h3>
             </div>
@@ -83,7 +84,7 @@ export default function SingleWine({ match }) {
                           <Select name="quantity" onChange={(e) => setQuantity(e.target.value)} className={style.cantidad} >
 
                             {stock && stock.map((n) => {
-                              return <MenuItem value={n}>{n} {n > 1 ? 'unidades' : 'unidad'}</MenuItem>
+                              return <MenuItem key={n} value={n}>{n} {n > 1 ? 'unidades' : 'unidad'}</MenuItem>
                             })
                             }
                           </Select>
@@ -114,38 +115,10 @@ export default function SingleWine({ match }) {
         </Grid>
       </Grid>
       <hr />
+      {selectedWine.reviews && selectedWine.reviews.length ? <ReviewsList reviews={selectedWine.reviews}/> : null }
+      
+    </div >
 
-      <div>
-        {isLoggedIn ? (
-          <>
-            <select
-              name="quantity"
-              onChange={(e) => setQuantity(e.target.value)}
-            >
-              <option value="">0</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-            </select>
-            {quantity ? (
-              <Button variant="contained" color="primary" onClick={AddProduct}>
-                AGREGAR
-              </Button>
-            ) : (
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={AddProduct}
-                disabled
-              >
-                AGREGAR
-              </Button>
-            )}
-          </>
-        ) : null}
 
-        <hr />
-      </div>
-    </div>
   );
 }

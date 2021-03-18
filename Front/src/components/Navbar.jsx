@@ -3,52 +3,45 @@ import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { userLogout } from "../store/user";
-import { resetCart_items } from "../store/cart";
+import { userLogout } from "../store/user"
+import { resetCart_items } from "../store/cart"
 
 import Button from "@material-ui/core/Button";
 import styles from "../styles/navbar.module.css";
 
 const Navbar = () => {
-  const history = useHistory();
-  const dispatch = useDispatch();
+    const history = useHistory()
+    const dispatch = useDispatch();
 
-  const user = useSelector((state) => state.user);
-  const cart_items = useSelector((state) => state.cart_items);
-  const [query, setQuery] = React.useState("");
+    const user = useSelector((state) => state.user)
+    const cart_items = useSelector((state) => state.cart_items)
+    const [query, setQuery] = React.useState('');
 
-  const isLoggedIn = Object.keys(user).length;
+    const isLoggedIn = Object.keys(user).length
 
-  const handleQuery = (string) => {
-    const querySearch = string;
-    setQuery("");
-    string.trim().length && history.push(`/search/${querySearch}`);
-  };
+    const handleQuery = string => {
+        const querySearch = string
+        setQuery('');
+        string.trim().length && history.push(`/search/${querySearch}`)
+    };
 
-  const logOutHandler = () => {
-    if (isLoggedIn) {
-      const token = user.token;
-      axios
-        .put("http://localhost:5000/api/cart", cart_items, {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        .then(({ data }) => data);
+    const logOutHandler = () => {
+        if (isLoggedIn) {
+            const token = user.token
+            axios.put("http://localhost:5000/api/cart", cart_items, {
+                headers: { Authorization: `Bearer ${token}` }
+            })
+            .then(({data}) => data)
 
-      localStorage.clear();
+            dispatch(userLogout())
+            dispatch(resetCart_items())
 
-      dispatch(userLogout());
-      dispatch(resetCart_items());
+            history.push("/")
+        } else {
+            history.push("/login")
 
-      history.push("/");
-    } else {
-      history.push("/login");
-    }
-  };
+        }  
 
-  function handleChange(e) {
-    const key = e.keyCode;
-    if (key === 13) {
-      return handleQuery(query);
     }
   }
 
@@ -140,5 +133,7 @@ const Navbar = () => {
       </div>
     </div>
   );
+
 };
+
 export default Navbar; 

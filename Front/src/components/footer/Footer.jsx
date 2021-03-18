@@ -10,7 +10,8 @@ const Footer = () => {
             <Typography variant="h6" className={styles.text}>
                 <span>ARWines</span>
                 <Divider className={styles.divider}/>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                Con más de 40 años de trayectoria, ARWines se afianza con 10 sucursales de primer nivel, espacios de cata, personal especializado y la representación de las mejores bodegas nacionales e internacionales.
+                Nuestra misión es brindar una experiencia de compra superior, siempre con precios muy competitivos. Nos diferencia la experiencia y el conocimiento sobre los productos que ofrecemos y la vocación de servicio de todo nuestro personal.   
             </Typography>
             <Typography variant="body2" className={styles.footer}>
                 ARWines © Plataforma 5 - 2021

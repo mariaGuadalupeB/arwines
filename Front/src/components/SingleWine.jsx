@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { saveCartItems } from "../store/cart";
 import { Button, Box, Grid } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
+
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -34,7 +35,6 @@ export default function SingleWine({ match }) {
   }, []);
 
   const AddProduct = () => {
-
     let alreadyExisted = false
     const updatedCart = items.map(cart_item => {
       if (cart_item.productId === selectedWine.id) {
@@ -49,12 +49,8 @@ export default function SingleWine({ match }) {
       quantity: +quantity
     })
     localStorage.setItem("cart_items", JSON.stringify(updatedCart))
-
     dispatch(saveCartItems(updatedCart))
-    //   dispatch(saveCartItems({
-    //   productId: selectedWine.id,
-    //   quantity: +quantity
-    // }))  
+    
     history.push("/cart")
   }
 
@@ -73,12 +69,11 @@ export default function SingleWine({ match }) {
             <div className={style.boxPrice}>
               <h3 className={style.precio}>Precio: $ {selectedWine.price}</h3>
             </div>
-
             <p className={style.description}>Descripcion: {selectedWine.description}</p>
 
-            {
-              isLoggedIn ?
-                (
+            {/* {
+              isLoggedIn || !isLoggedIn ?
+                ( */}
                   <>
 
 
@@ -110,15 +105,16 @@ export default function SingleWine({ match }) {
 
                     </div>
                   </>
-                )
+                {/* )
                 :
                 null
-            }
+            } */}
 
           </div>
         </Grid>
       </Grid>
       <hr />
+
       {selectedWine.reviews && selectedWine.reviews.length ? <ReviewsList reviews={selectedWine.reviews}/> : null }
       
     </div >

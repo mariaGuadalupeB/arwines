@@ -83,8 +83,8 @@ cartController.confirmCart = (req, res, next) => {
   if(isAdmin) {
     Cart.findByPk(cartId)
     .then(cart=> {
-      cart.update({status: 'confirmed'})
-      return cart.dataValues;
+      cart.update({status: 'confirmed', raw:true})
+      return cart;
     })
     .then(cart=>res.status(200).send(cart))
     .catch(next);  
@@ -114,7 +114,7 @@ cartController.rejectCart = (req, res, next) => {
   }
 }
 
-cartController.getCarts = (req, res, next) => {
+cartController.getCarts_items = (req, res, next) => {
   const userTokenId = req.user.userId;
   
   Cart.findAll({
@@ -123,8 +123,17 @@ cartController.getCarts = (req, res, next) => {
     raw: true
    })
    .then(userCart=>{
+     console.log(userCart)
       res.status(200).send(userCart)
    })
+    .catch(next);
+}
+cartController.getCarts = (req, res, next) => {
+  Cart.findAll({
+    where: {status: {[Op.ne]: 'active'}},
+    include: [{model: Cart_item, include: [Product]}]})
+  // Cart.findAll()
+    .then(carts => res.status(200).send(carts))
     .catch(next);
 }
 

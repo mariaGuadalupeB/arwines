@@ -8,6 +8,7 @@ export const setWines = createAsyncThunk('SET_WINES', () => {
 })
 
 export const queryWines = createAsyncThunk('QUERY_WINES', string => {
+  console.log(string)
   return axios.get(`${baseUrl}/search?name=${string}`).then(res => res.data).catch(err => err);
 });
 

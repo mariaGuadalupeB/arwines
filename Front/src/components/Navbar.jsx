@@ -9,7 +9,9 @@ import { resetCart_items } from "../store/cart"
 import Button from "@material-ui/core/Button";
 import styles from "../styles/navbar.module.css";
 
+
 const Navbar = () => {
+
     const history = useHistory()
     const dispatch = useDispatch();
 
@@ -25,6 +27,15 @@ const Navbar = () => {
         string.trim().length && history.push(`/search/${querySearch}`)
     };
 
+    const handleChange = e => {
+      const key = e.keyCode
+      
+      if (key === 13) {
+        return handleQuery(query);
+      }
+    }
+  
+  
     const logOutHandler = () => {
         if (isLoggedIn) {
             const token = user.token
@@ -42,8 +53,9 @@ const Navbar = () => {
 
         }  
 
+
     }
-  }
+
 
   return (
     <div className="barra">
@@ -64,6 +76,7 @@ const Navbar = () => {
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={(e) => handleChange(e)}
             />
+
             {query ? (
               <Button
                 variant="outlined"
@@ -95,7 +108,7 @@ const Navbar = () => {
               </Button>
             )}
 
-          
+
           </div>
   
         </div>
@@ -137,4 +150,6 @@ const Navbar = () => {
 
 };
 
+
 export default Navbar; 
+

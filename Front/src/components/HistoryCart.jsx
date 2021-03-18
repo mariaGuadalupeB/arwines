@@ -72,11 +72,10 @@ const HistoryCart = () => {
 
   React.useEffect(() => {
     axios
-      .get("http://localhost:5000/api/cart/", {
+      .get("http://localhost:5000/api/cart/history", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(({ data }) => {
-        console.log(data);
         setItems(data);
       });
   }, []);

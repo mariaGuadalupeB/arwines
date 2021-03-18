@@ -40,7 +40,8 @@ const OrdersTable = () => {
     React.useEffect(() => {
       axios.get('http://localhost:5000/api/cart', { headers: { Authorization: `Bearer ${token}` } })
         .then(r => r.data)
-        .then(orders => setOrders(orders.filter(order => order.status !== 'active')));
+        .then(orders => setOrders(orders));
+        // .then(orders => setOrders(orders.filter(order => order.status !== 'active')));
     }, []);
    
     const handleConfirm = id => {

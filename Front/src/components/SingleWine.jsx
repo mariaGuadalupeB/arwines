@@ -47,12 +47,8 @@ export default function SingleWine({ match }) {
       quantity: +quantity
     })
     localStorage.setItem("cart_items", JSON.stringify(updatedCart))
-
     dispatch(saveCartItems(updatedCart))
-    //   dispatch(saveCartItems({
-    //   productId: selectedWine.id,
-    //   quantity: +quantity
-    // }))  
+    
     history.push("/cart")
   }
 
@@ -75,9 +71,9 @@ export default function SingleWine({ match }) {
 
             <p className={style.description}>Descripcion: {selectedWine.description}</p>
 
-            {
-              isLoggedIn ?
-                (
+            {/* {
+              isLoggedIn || !isLoggedIn ?
+                ( */}
                   <>
 
 
@@ -109,10 +105,10 @@ export default function SingleWine({ match }) {
 
                     </div>
                   </>
-                )
+                {/* )
                 :
                 null
-            }
+            } */}
 
           </div>
         </Grid>

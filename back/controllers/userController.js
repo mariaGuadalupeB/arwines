@@ -15,21 +15,28 @@ const secret = process.env.SECRET;
 const userController = {}
 
 userController.register = (req, res, next) => {
+    const {unloggedCart_items} = req.body
+    delete req.body.unloggedCart_items
+
     User.create(req.body)
    .then((user) => {
         const token = user.generateToken()
         const {id,firstName,email, admin} = user.dataValues
 
         user.getCarts({where: {status : `active`}, include: Cart_item})
-        .then(cart => {
-            const {cart_items} = cart[0]
+        .then(async cart => {
+            let cart_items = await cart[0].getCart_items({raw:true, attributes: [`productId`, `quantity`]})
+            const all_items = [...cart_items, ...unloggedCart_items]
+
+            cart_items = helpers.mergeArrayOfObjects(all_items)
+            
             return res.status(200).send({user: { token, id, email, firstName, admin, cart_items }}) 
         })    
     })
     .catch(next);
 } 
 userController.login =  (req, res, next) => {
-    const { email, password } = req.body;
+    const { email, password, unloggedCart_items } = req.body;
 
     User.findOne({where: {email}})
     .then((user) => {
@@ -39,9 +46,12 @@ userController.login =  (req, res, next) => {
         const {id,firstName, admin} = user.dataValues
 
         user.getCarts({where: {status : `active`}, include: Cart_item})
-        .then(cart => {
+        .then(async cart => {
+            let cart_items = await cart[0].getCart_items({raw:true, attributes: [`productId`, `quantity`]})
+            const all_items = [...cart_items, ...unloggedCart_items]
+
+            cart_items = helpers.mergeArrayOfObjects(all_items)
             
-            const {cart_items} = cart[0]
             return res.status(200).send({user: { token, id, email, firstName, admin, cart_items }}) 
         })    
     })

@@ -82,21 +82,52 @@ cartController.confirmCart = (req, res, next) => {
 
   if(isAdmin) {
     Cart.findByPk(cartId)
-    .then(cart=>cart.update({status: 'confirmed'}))
-    .then(cart=>res.status(200).send('carrito confirmado'))
-    }
+    .then(cart=> {
+      cart.update({status: 'confirmed'})
+      return cart.dataValues;
+    })
+    .then(cart=>res.status(200).send(cart))
+    .catch(next);  
+  }
 }
 
 cartController.rejectCart = (req, res, next) => {
   const {userId, isAdmin} = req.user
   const userTokenId = req.user.userId
   const {cartId} = req.params
-  
+
   if(isAdmin) {
-    Cart.findByPk(cartId)
-    .then(cart=>cart.update({status: 'confirmed'}))
-    .then(cart=>res.status(200).send('carrito confirmado'))
+    Cart.findOne({
+      where: { id: cartId},
+      include: {model:Cart_item, include: Product}})
+    .then(cart=> {
+      cart.update({status: 'rejected'})
+      return cart.getCart_items()})
+    .then( cart_items=>cart_items.map(async (cart_item) => {
+      const product = await cart_item.getProduct()
+
+      product.quantity += cart_item.quantity
+      product.update()
+      product.save()
+    }))
+    .then(()=>res.status(200).send('Cart was rejected'))
   }
 }
 
+cartController.getCarts = (req, res, next) => {
+  const userTokenId = req.user.userId;
+  
+  Cart.findAll({
+    where: {[Op.or]:[{status: "pending"}, {status: "confirmed"}, {status: "rejected"}], userId: userTokenId},
+    include: {model: Cart_item, include: Product},
+    raw: true
+   })
+   .then(userCart=>{
+      res.status(200).send(userCart)
+   })
+    .catch(next);
+}
+
 module.exports = cartController;
+
+

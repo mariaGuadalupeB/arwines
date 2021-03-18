@@ -25,17 +25,19 @@ function randomLink () {
 
 function nameGenerator () {
   const names = ['PAZ','LAGARDE', 'DON VALENTIN', 'RUTINI', 'LUIGI BOSCA', 'OASIS', 'MANOS NEGRAS', 'PORTILLO', 'SALENTEIN', 'BON VOYAGE']
-  const types = ['MALBEC', 'ROSADO', 'BLANCO', 'PETIT NOIR', 'SYRAH', 'CABERNET SAUVIGNON', 'OTRO CABERNET', 'BLANCO BIEN SUAVE', 'HERMOSO', 'DELIZIA']
+  const types = ['MALBEC', 'ROSADO', 'BLANCO', 'PETIT NOIR', 'SYRAH', 'CABERNET SAUVIGNON', 'TANAT', 'HERMOSO', 'DELIZIA', 'TORRONTES']
 
   return `${names[+Math.random(1).toString().split('.')[1][0]]} ${types[+Math.random(1).toString().split('.')[1][0]]}`
 }
+
 function weightGenerator () {
-  return Math.random(1).toString().split('.')[1].slice(0,3)
+  return Math.random(5).toString().split('.')[1].slice(0,3)
 }
 
-function randomCategory() {
-  const cats = ['tinto', 'blanco', 'rosado' ]
-  return Math.floor(Math.random() * cats.length)
+function randomDescription() {
+  const names = ["Vino que sin llegar a ser dulce ofrece sensaciones azucaradas", "Vino ligero, fresco, fácil de tomar y con buen paso de boca. Ausencia total de complejidades aromáticas", "Vino de gran crianza; se trata de aromas penetrantes que dan sensación de frescura y matices mentolados", "Vino joven y sin terminar", "Vino tinto de color intenso y tonos apagados por su poca acidez", "Vino con aromas densos e intensos originados por los aceites esenciales que contiene"]
+  
+  return `${[names[Math.floor(Math.random() * 6)]]}`  
 }
 
 
@@ -43,18 +45,17 @@ function wineGenerator () {
   let name = nameGenerator()
   return {
     name,
-    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
-    weight: weightGenerator(),
-    brand: name.split(' ')[0],
+    description: randomDescription(),
+    weight: "750cc",
     quantity: weightGenerator(),
     image_path: randomLink(),
     price: weightGenerator(),
-    categories: randomCategory(),
+    categories
   }
 }
 
 let arr = []
-for(let i=0; i<15; i++) {
+for(let i=0; i<20; i++) {
   arr.push(wineGenerator())
 }
 

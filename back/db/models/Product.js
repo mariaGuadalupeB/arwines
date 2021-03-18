@@ -24,10 +24,6 @@ Product.init(
             type: S.STRING,
             allowNull: false,
         },
-		brand: {
-			type: S.STRING,
-			allowNull: false,
-		},
         quantity: {
             type: S.INTEGER,
             allowNull: false,

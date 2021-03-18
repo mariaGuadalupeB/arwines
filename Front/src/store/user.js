@@ -10,6 +10,8 @@ export const sendRegisterRequest = createAsyncThunk('USER_REGISTER_REQUEST', (ne
     .then(({ data: {user} }) => {
         const {token, id, email, firstName, admin, cart_items} = user
         const userData = {token, id, email, firstName, admin, cart_items}
+        const unloggedCart_items = newUser.cart_items
+        console.log(unloggedCart_items)
 
         localStorage.setItem("user", JSON.stringify(userData));
         localStorage.setItem("cart_items", JSON.stringify(cart_items));
@@ -20,6 +22,7 @@ export const sendRegisterRequest = createAsyncThunk('USER_REGISTER_REQUEST', (ne
 
 // LOGIN
 export const sendLoginRequest = createAsyncThunk('USER_LOGIN_REQUEST', (loggedUser, thunkAPI)=>{
+    // const {unloggedCart_items} = loggedUser
     return axios 
     .post("http://localhost:5000/api/user/login", loggedUser)
     .then(({ data: {user} }) => {
@@ -43,7 +46,10 @@ const user = JSON.parse(localStorage.getItem("user")) || {}
 const userReducer = createReducer(user , {
     [sendRegisterRequest.fulfilled]: (state, action) => action.payload,
     [sendLoginRequest.fulfilled]: (state, action) => action.payload,
-    [userLogout] : (state, action) => ({})
+    [userLogout] : (state, action) => {
+        localStorage.clear();
+        return {}
+    }
 })
 
 export default userReducer

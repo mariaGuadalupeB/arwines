@@ -9,7 +9,7 @@ controller.getProductsByCategory = (req, res, next) => {
         Category.findOne({
             where: {
                 name: {
-                [Op.like]: valueToSearch +'%' 
+                [Op.like]: '%' + valueToSearch.toUpperCase() + '%' 
                 }
             }
         })

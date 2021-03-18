@@ -9,6 +9,11 @@
     z-index: 1000;
     position: relative; 
     padding: 0 8em;
+    @media screen and(max-width: 768px){
+      width: 2px;
+    }
+      
+    
   }
   .barraD img {
     width: 86px;
@@ -52,3 +57,4 @@
   .carrito{
     padding-left: 23px;
   }
+

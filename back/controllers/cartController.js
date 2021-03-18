@@ -131,7 +131,7 @@ cartController.getCarts_items = (req, res, next) => {
 cartController.getCarts = (req, res, next) => {
   Cart.findAll({
     where: {status: {[Op.ne]: 'active'}},
-    include: {model: Cart_item, include: Product}})
+    include: [{model: Cart_item, include: [Product]}]})
   // Cart.findAll()
     .then(carts => res.status(200).send(carts))
     .catch(next);

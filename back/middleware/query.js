@@ -1,4 +1,5 @@
 const Product = require('../db/models/Product');
+const { Category } = require('../db/models')
 const { Op } = require("sequelize");
 
 
@@ -11,7 +12,8 @@ const isQuery = (req, res, next) => {
                 [keys[0]]: {
                     [Op.like]: '%'+req.query[keys[0]].toUpperCase()+'%'
                 }
-            } 
+            },
+            include: Category
         })
             .then(products => res.status(200).send(products))
             .catch(next);

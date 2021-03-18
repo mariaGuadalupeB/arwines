@@ -73,17 +73,15 @@ const Cart = () => {
 
   const checkOutCart = () => {
     return axios
-      .post(
-        "http://localhost:5000/api/cart/",
-        { cart_items, total },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
-      .then((x) => console.log(1))
-      .then(() => dispatch(resetCart_items()))
-      .then(() => localStorage.setItem("cart_items", JSON.stringify([])));
-  };
+
+      .post("http://localhost:5000/api/cart/", {cart_items, total}, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      .then(()=>dispatch(resetCart_items()))
+      .then(()=>localStorage.setItem('cart_items', JSON.stringify([])) )
+  }
+
+
 
   const deleteProduct = (idWine) => {
     console.log(idWine)

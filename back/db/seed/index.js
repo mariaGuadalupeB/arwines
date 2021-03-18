@@ -1,6 +1,8 @@
 const { Category, User, Product } = require("../models");
 const products = require("./products");
 const categories = require("./categories");
+const prod_cats = require("./prod_cat")
+const { findOne } = require('../models/Product');
 
 let bulkCategories = () => Category.bulkCreate(categories).then((res) => res);
 
@@ -40,3 +42,4 @@ Promise.all([bulkCategories(), bulkProducts()]).then((x) => {
   );
   return x;
 });
+

@@ -120,7 +120,7 @@ const HistoryCart = () => {
               <TableRow>
                 <TableCell align="center">Carrito</TableCell>
                 <TableCell align="center">Producto/s</TableCell>
-                <TableCell align="center">Subtotal</TableCell>
+                <TableCell align="center">Total</TableCell>
                 <TableCell align="center">Estado</TableCell>
               </TableRow>
             </TableHead>

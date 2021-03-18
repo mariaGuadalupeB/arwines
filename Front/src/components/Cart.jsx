@@ -78,15 +78,27 @@ const Cart = () => {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(()=>dispatch(resetCart_items()))
+      .then(()=>dispatch(resetCart_items()))
       .then(()=>localStorage.setItem('cart_items', JSON.stringify([])) )
   }
 
 
 
   const deleteProduct = (idWine) => {
-    console.log(idWine)
+    // let arr = JSON.parse(localStorage.getItem("cart_items"))
+    // for(let element of arr){
+    //   if(element.productId == idWine){
+    //     arr.splice(items.indexOf(element),1)
+    //     console.log(arr)
+    //     localStorage.setItem('cart_items', JSON.stringify(arr))
+    //     dispatch(saveCartItems(arr))
+    //   }
+    }
+    
+    // console.log(items)
+    
+    // axios.delete(`http://localhost:5000/api/cartItem/${idWine}`)
 
-    // axios.delete(`http://localhost:5000/api/cart/${id}`)
   }
 
   const historyCart = () => {
@@ -168,6 +180,7 @@ const Cart = () => {
                     <TableCell align="center"></TableCell>
                   </TableRow>
                 </TableHead>
+                
                 <TableBody>
                   {items.length &&
                     items.map((wine, i) => (
@@ -196,6 +209,7 @@ const Cart = () => {
                       </TableRow>
                     ))}
                 </TableBody>
+
               </Table>
             </TableContainer>
           </Grid>

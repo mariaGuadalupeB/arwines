@@ -69,6 +69,7 @@ const Cart = () => {
   const { token } = useSelector((state) => state.user);
   const [items, setItems] = useState([]);
   const classes = useStyles();
+  const history = useHistory()
 
   const checkOutCart = () => {
     return axios
@@ -80,15 +81,20 @@ const Cart = () => {
       .then(()=>localStorage.setItem('cart_items', JSON.stringify([])) )
   }
 
-React.useEffect(() => {
+
 
   const deleteProduct = (idWine) => {
     console.log(idWine)
-    
+
     // axios.delete(`http://localhost:5000/api/cart/${id}`)
   }
 
+  const historyCart = () => {
+    history.push("/historycart")
+  }
 
+  React.useEffect(() => {
+    console.log(cart_items, "CART ITEMS EN STORE DESDE CART");
     const promisesProducts = cart_items.map((cartItem) => {
       const id = cartItem.productId;
       return axios
@@ -105,13 +111,26 @@ React.useEffect(() => {
 
   return (
     <div>
-      <Grid container xs={12}>
-        <Grid item xs={8}>
           <div className={classes.headerCart}>
-            <Typography variant="h4" component="h4">
-              {" "}
-              Shop Cart
-            </Typography>
+            <div style={{ width: "100%" }}>
+              <Box display="flex">
+                <Box flexGrow={1}>
+                  <Typography variant="h4" component="h4">
+                    {" "}
+                    Shop Cart
+                  </Typography>
+                </Box>
+                <Box p={1}>
+                <Button
+                    variant="outlined"
+                    color="primary"
+                    onClick={historyCart}
+                  >
+                    Ver historial de compra
+                  </Button>
+                </Box>
+              </Box>
+            </div>
           </div>
 
           <div className={classes.headerCart}>
@@ -197,18 +216,6 @@ React.useEffect(() => {
               </Box>
             </div>
           </div>
-        </Grid>
-        <Grid item xs={4} className={classes.history} >
-          <Paper elevation={0} className={classes.paper}>
-        <Typography variant="h5" component="h5">
-                    {" "}
-                    Historial de compras
-                  </Typography>
-
-          </Paper>
-        </Grid>
-
-      </Grid>
     </div>
   );
 };

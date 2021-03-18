@@ -2,7 +2,7 @@ import {makeStyles} from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     box: {
-        height: '27.6em',
+        height: '34em',
         backgroundColor: '#38182F',
         width: '100%'
     },
@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
         fontStyle: 'italic'
     },
     footer: {
-        margin: '0 auto',
+        margin: 'auto auto',
         color: '#D6D6FF'
     },
     divider: {

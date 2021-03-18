@@ -15,12 +15,13 @@ Cart.init(
 			allowNull: false,
 			defaultValue: "active",
 		},
-		// userId: {
-		// 	type: S.INTEGER,
-		// 	allowNull: false,
-		// },
-	},
+		total: {
+			type: S.INTEGER,
+			allowNull: true,
+		}
 
+	},
+	
   { sequelize: db,
     modelName: "cart", 
    }

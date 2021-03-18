@@ -42,14 +42,13 @@ const Login = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
-
-  // const userCart_items = useSelector((state) => state.user.cart_items);
-  
+    
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [error, setError] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
-  
+  const unloggedCart_items = useSelector(state=>state.cart_items)
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true)
@@ -60,10 +59,11 @@ const Login = () => {
     if (validatePassword(password) === false) {
       return setError("Password invalido");
     }
-    dispatch(sendLoginRequest({ email, password }))
+    dispatch(sendLoginRequest({ email, password, unloggedCart_items }))
     .then(() => {
-      const cart_items = JSON.parse(localStorage.getItem("cart_items"))
 
+      const cart_items = JSON.parse(localStorage.getItem("cart_items"))
+      
       dispatch(saveCartItems(cart_items))
       setIsLoading(false)
 

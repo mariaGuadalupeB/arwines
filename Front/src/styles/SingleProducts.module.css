@@ -10,7 +10,7 @@
 }
 
 .unico img {
-  margin-top: 74px;
+  margin: 4em 0 2em 0;
   width: 383px;
 }
 
@@ -44,7 +44,7 @@
   cursor: pointer;
   text-align: center;
   padding: 50px 0px 0px 0px;
-  margin-left: -1px;
+  margin-left: 50px;
 }
 .description {
   font-size: 20px;
@@ -52,3 +52,28 @@
   margin-bottom: 40px; 
   color: rgb(100,100,100);
 }
+.botonCarro {
+  margin-top: 25px;
+  margin-left: -6px;
+
+}
+.botonCarro button {
+  height: 48px;
+    width: 222px;
+}
+.quantity p {
+  display: inline-block;
+  padding-right: 240px;
+  padding-left: 70px;
+  padding-top: 9px;
+  float: right;
+  font-style: italic;
+  color: #8C909E;
+}
+/*   margin-top: 40px;
+  display: flex;
+  justify-content: end;
+  margin-right: -4px; */
+/* .cantidad {
+ 
+} */

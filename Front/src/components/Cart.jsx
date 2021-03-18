@@ -73,20 +73,12 @@ const Cart = () => {
 
   const checkOutCart = () => {
     return axios
-
       .post("http://localhost:5000/api/cart/", {cart_items, total}, {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(()=>dispatch(resetCart_items()))
       .then(()=>localStorage.setItem('cart_items', JSON.stringify([])) )
-  }
-
-
-
-  const deleteProduct = (idWine) => {
-    console.log(idWine)
-
-    // axios.delete(`http://localhost:5000/api/cart/${id}`)
+      .then(()=> history.push("/checkoutcart"))
   }
 
   const historyCart = () => {
@@ -145,7 +137,7 @@ const Cart = () => {
                 <Box p={1}>
                   <Typography variant="h5" component="h5">
                     {" "}
-                    Subtotal: ${items.length && total}
+                    Total: ${items.length && total}
                   </Typography>
                 </Box>
               </Box>
@@ -164,7 +156,7 @@ const Cart = () => {
                     <TableCell align="center">Producto</TableCell>
                     {<TableCell align="right"></TableCell>}
                     <TableCell align="center">Precio:</TableCell>
-                    <TableCell align="center">Cantidad pedida:</TableCell>
+                    <TableCell align="center">Cantidad:</TableCell>
                     <TableCell align="center"></TableCell>
                   </TableRow>
                 </TableHead>

@@ -3,30 +3,30 @@ import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { userLogout } from "../store/user";
-import { resetCart_items } from "../store/cart";
+import { userLogout } from "../store/user"
+import { resetCart_items } from "../store/cart"
 
 import Button from "@material-ui/core/Button";
 import styles from "../styles/navbar.module.css";
 
 const Navbar = () => {
     const history = useHistory()
-    const dispatch = useDispatch(); 
+    const dispatch = useDispatch();
 
     const user = useSelector((state) => state.user)
     const cart_items = useSelector((state) => state.cart_items)
     const [query, setQuery] = React.useState('');
-    
-    const isLoggedIn = Object.keys(user).length 
-    
-    const handleQuery = string => { 
+
+    const isLoggedIn = Object.keys(user).length
+
+    const handleQuery = string => {
         const querySearch = string
         setQuery('');
-        string.trim().length && history.push(`/search/${querySearch}`) 
-    };    
+        string.trim().length && history.push(`/search/${querySearch}`)
+    };
 
     const logOutHandler = () => {
-        if(isLoggedIn) {
+        if (isLoggedIn) {
             const token = user.token
             axios.put("http://localhost:5000/api/cart", cart_items, {
                 headers: { Authorization: `Bearer ${token}` }
@@ -37,8 +37,9 @@ const Navbar = () => {
             dispatch(resetCart_items())
 
             history.push("/")
-        }else{
+        } else {
             history.push("/login")
+
         }  
 
     }
@@ -146,6 +147,7 @@ const Navbar = () => {
                 )}
               </div>
             </div>
+
           </div>
         </div>
       );

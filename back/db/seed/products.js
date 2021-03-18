@@ -50,7 +50,6 @@ function wineGenerator () {
     quantity: weightGenerator(),
     image_path: randomLink(),
     price: weightGenerator(),
-    categories
   }
 }
 

@@ -42,4 +42,3 @@ Promise.all([bulkCategories(), bulkProducts()]).then((x) => {
   );
   return x;
 });
-

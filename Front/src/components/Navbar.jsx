@@ -97,6 +97,7 @@ const Navbar = () => {
 
           
           </div>
+  
         </div>
         
         <div className={styles.barraI}>

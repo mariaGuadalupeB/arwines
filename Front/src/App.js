@@ -13,6 +13,7 @@ import SingleWine from "./components/SingleWine";
 import Navbar from "./components/Navbar";
 import PanelAdmin from './components/panelAdmin/PanelAdmin';
 import HistoryCart from './components/HistoryCart'
+import CheckoutOrder from "./components/CheckoutOrder"
 
 // store
 import store from "./store/store";
@@ -42,6 +43,7 @@ function App() {
             <Route exact path="/register" component={Register} />
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/historycart" component={HistoryCart} />
+            <Route exact path="/checkoutcart" component={CheckoutOrder} />
           </Switch>
         </BrowserRouter>
       </Provider>

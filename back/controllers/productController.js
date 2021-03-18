@@ -28,11 +28,7 @@ controller.updateProduct = (req, res, next) => {
         .then(product => {
             if(!product) res.sendStatus(404);
             else {
-                product.update(req.body)
-                res.status(200).send({
-                    updatedProduct: product
-                })
-
+                product.update(req.body).then(product => res.status(200).send(product)).catch(next);
                 // .then(product => {
                 //     helpers.categoryHelper(req.body.categories)
                 //         .then(categories => {
@@ -43,7 +39,7 @@ controller.updateProduct = (req, res, next) => {
                 // })
             }
         })
-            .catch(err=>console.log(err));
+        .catch(next);
     }
     else res.status(403).send('Unauthorized')
 };

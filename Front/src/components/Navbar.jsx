@@ -88,13 +88,19 @@ const Navbar = () => {
                             !isLoggedIn ? 
                             (
                                 <Link to="/register">
-                                    <Button variant="contained" style={{backgroundColor: '#38182F', color: 'white', textDecoration: 'underline'}}> Register</Button>
+                                    <Button variant="contained" style={{backgroundColor: '#38182F', color: 'white', textDecoration: 'underline'}}>Register</Button>
                                 </Link>
                             ) 
                             : 
                             (
                             <div className={styles.carrito}>
-                            <Link to='/cart'><span className="material-icons">shopping_cart</span></Link>
+                                {user.admin ? 
+                                <Link to="/admin">
+                                     <Button variant="contained" style={{backgroundColor: '#38182F', color: 'white', textDecoration: 'underline'}}>ADMIN</Button>
+                                </Link>
+                                 :
+                                <Link to='/cart'><span className="material-icons">shopping_cart</span></Link> 
+                                }
                             </div>
                             )
                                     

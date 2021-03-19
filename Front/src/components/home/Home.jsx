@@ -39,7 +39,7 @@ const Home = () => {
                 </Button>
               </Toolbar>
             </AppBar>
-            <img src='/unboxed10-1920x1355.jpg' className={styles.img}/>
+            <img src='/unboxed10-1920x1355.jpg' alt='vinos' className={styles.img}/>
             <Divider className={styles.divider}/>
             <GalleryContainer />
             <Footer />

@@ -1,9 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import Style from '../styles/errorMsg.module.css'
-import { Button } from "@material-ui/core"
 
-export default () => {
+import Style from '../styles/errorMsg.module.css'
+
+
+const ErrorMsg = () => {
 
     return (
         <div>
@@ -39,3 +39,4 @@ export default () => {
     );
 };
 
+export default ErrorMsg;

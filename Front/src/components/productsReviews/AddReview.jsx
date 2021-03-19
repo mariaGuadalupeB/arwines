@@ -10,12 +10,10 @@ const useStyles = makeStyles(theme => ({
         width: '30em',
         backgroundColor: '#e6e6e6',
         position: 'absolute',
-        zIndex: 1,
         borderRadius: '1em',
         padding: '2em',
         margin: '4em',
         border: '0.5em solid black',
-        position: 'absolute',
         zIndex: 2
     },
     textfield: {

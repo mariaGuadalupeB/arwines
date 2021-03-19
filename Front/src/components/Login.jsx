@@ -93,16 +93,7 @@ const Login = () => {
             value={email}
           />
           <br />
-          {/* <label>
-          {" "}
-          Email:
-          <input
-            type="text"
-            name="email"
-            onChange={changeEmail}
-            value={email}
-          ></input>
-        </label> */}
+         
           <TextField
             className={classes.button}
             id="standard-basic"
@@ -113,16 +104,7 @@ const Login = () => {
             value={password}
           />
           <br />
-          {/* <label>
-          {" "}
-          Password:
-          <input
-            type="password"
-            name="password"
-            onChange={changePassword}
-            value={password}
-          ></input>
-        </label> */}
+         
           <div className={classes.logIn}>
             <Button
               className={classes.button}

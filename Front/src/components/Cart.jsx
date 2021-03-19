@@ -125,18 +125,14 @@ const Cart = () => {
 
   const subQuantityHandler = (wine) => {
     let arr = JSON.parse(localStorage.getItem("cart_items"))
-    arr.map((item) => {
-      if (item.productId === wine.id) item.quantity = wine.quantity - 1
-    })
+    arr.map((item) => item.productId === wine.id ? item.quantity = wine.quantity - 1 : null)
 
     functionAddSub(arr)
   }
 
   const addQuantityHandler = (wine) => {
     let arr = JSON.parse(localStorage.getItem("cart_items"))
-    arr.map((item) => {
-      if (item.productId === wine.id) item.quantity = wine.quantity + 1
-    })
+    arr.map((item) => item.productId === wine.id ? item.quantity = wine.quantity + 1 : null)
 
     functionAddSub(arr)
   }
@@ -144,7 +140,7 @@ const Cart = () => {
   const deleteProduct = (idWine) => {
     let arr = JSON.parse(localStorage.getItem("cart_items"))
     for (let element of arr) {
-      if (element.productId == idWine) {
+      if (+element.productId === +idWine) {
         arr.splice(arr.indexOf(element), 1)
 
         functionAddSub(arr)
@@ -223,6 +219,7 @@ const Cart = () => {
                         className={style.style}
                       >
                         <img
+                          alt='vino'
                           className={classes.img}
                           src={wine.image_path}
                         />

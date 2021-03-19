@@ -50,7 +50,7 @@ const AddCategory = ({toggleAddCategoryWindow, categories, setCategories, select
             .then(r => r.data)
             .then(category => {
                 setCategories(categories => categories.map(categoryMap => {
-                    if(category.id == categoryMap.id) return category;
+                    if(+category.id === +categoryMap.id) return category;
                     return categoryMap;
                 }));
                 toggleAddCategoryWindow();

@@ -63,7 +63,7 @@ const AddProduct = ({toggleAddProductWindow, setProducts, products, selectedProd
             .then(r => r.data)
             .then(productFromBack => {
                 setProducts(products => products.map(productMap => {
-                    if(productFromBack.id == productMap.id) return productFromBack;
+                    if(+productFromBack.id === +productMap.id) return productFromBack;
                     return productMap;
                 }));
                 toggleAddProductWindow();

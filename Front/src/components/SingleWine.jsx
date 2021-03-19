@@ -2,10 +2,10 @@
 import React, { useState } from "react";
 import style from "../styles/SingleProducts.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import wineReducer, { setWine } from "../store/wine";
-import { Link } from "react-router-dom";
+import  { setWine } from "../store/wine";
+
 import { saveCartItems } from "../store/cart";
-import { Button, Box, Grid } from "@material-ui/core";
+import { Button, Grid } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 
 import MenuItem from '@material-ui/core/MenuItem';
@@ -18,8 +18,7 @@ import Stars from "./productsReviews/Stars";
 export default function SingleWine({ match }) {
   const dispatch = useDispatch();
   const selectedWine = useSelector((state) => state.selectedWine);
-  const user = useSelector((state) => state.user);
-  const isLoggedIn = Object.keys(user).length;
+    
   const [quantity, setQuantity] = useState(0);
   const history = useHistory();
   const itmz = JSON.parse(localStorage.getItem("cart_items"));
@@ -60,7 +59,7 @@ export default function SingleWine({ match }) {
       <Grid container>
         <Grid item xs={6}>
           < div className={style.unico} >
-            <img src={selectedWine.image_path} />
+            <img alt='vino' src={selectedWine.image_path} />
           </div>
         </Grid>
         <Grid item xs={6}>
@@ -68,7 +67,7 @@ export default function SingleWine({ match }) {
             <h1 className={style.tituloVino}>{selectedWine.name}</h1>
             <h4>Category:</h4>
             {selectedWine.categories && selectedWine.categories.map((category, i, array) => {
-                return <small>{i < array.length - 1 ? `${category.name}, ` : `${category.name}`}</small>
+                return <small key={category.id}>{i < array.length - 1 ? `${category.name}, ` : `${category.name}`}</small>
                 
             })}
             {selectedWine.reviews && selectedWine.reviews.length ? <Stars number={Math.ceil(selectedWine.reviews.reduce((acc, ele) => acc += ele.rating , 0)/selectedWine.reviews.length)}/> : null }
@@ -77,9 +76,6 @@ export default function SingleWine({ match }) {
             </div>
             <p className={style.description}>Descripcion: {selectedWine.description}</p>
 
-            {/* {
-              isLoggedIn || !isLoggedIn ?
-                ( */}
                   <>
 
 
@@ -111,10 +107,6 @@ export default function SingleWine({ match }) {
 
                     </div>
                   </>
-                {/* )
-                :
-                null
-            } */}
 
           </div>
         </Grid>

@@ -1,4 +1,4 @@
-import { Drawer, List, ListItem, Typography, Box, Divider } from '@material-ui/core';
+import { Drawer, List, ListItem, Typography, Divider } from '@material-ui/core';
 import React from 'react'
 import UserTable from '../tables/UserTable';
 import CategoriesTable from '../tables/CategoriesTable';

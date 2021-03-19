@@ -1,6 +1,4 @@
-import { createAction, createReducer, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from "axios"
-
+import { createAction, createReducer } from '@reduxjs/toolkit';
 
 
 export const resetCart_items = createAction("RESET_CART_ITEMS")

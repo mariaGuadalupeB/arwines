@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { saveCartItems, fetchCartItemsData } from "../store/cart";
-import { useHistory } from "react-router";
+import { useSelector } from "react-redux";
+
+
 import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
 import axios from "axios";
-import style from "../styles/Products.module.css";
+
 import { makeStyles } from "@material-ui/core/styles";
-import { resetCart_items } from "../store/cart";
+
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -18,7 +17,7 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
-import DeleteIcon from "@material-ui/icons/Delete";
+
 import AddReview from './productsReviews/AddReview';
 
 const useStyles = makeStyles((theme) => ({
@@ -65,8 +64,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const HistoryCart = () => {
-  const dispatch = useDispatch();
-  const cart_items = useSelector((state) => state.cart_items);
+  
+  
   const { token } = useSelector((state) => state.user);
   const [openAddReview, setOpenAddReview] = React.useState(false);
   const [items, setItems] = useState([]);

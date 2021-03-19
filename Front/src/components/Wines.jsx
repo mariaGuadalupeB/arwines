@@ -7,7 +7,7 @@ import style from "../styles/Products.module.css";
 import ErrorMsg from "./ErrorMsg";
 
 
-export default ({ search }) => {
+const Wines = ({ search }) => {
   const dispatch = useDispatch();
   const wines = useSelector(state => state.wines)
 
@@ -40,7 +40,7 @@ export default ({ search }) => {
                   <div key={wine.id}>
                     <Link to={`/products/${wine.id}`} className={style.style}>
                       <div>
-                        <img src={wine.image_path} />
+                        <img src={wine.image_path} alt='vino'/>
                         <div className={style.centrado}>
                           <div>
                             <p> {wine.name} </p>
@@ -60,3 +60,4 @@ export default ({ search }) => {
   );
 };
 
+export default Wines;

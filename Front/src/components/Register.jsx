@@ -112,16 +112,7 @@ const Register = () => {
             onChange={changeFirstName}
             value={firstName}
           />
-        {/* <label>
-          {" "}
-          Nombre:
-          <input
-            type="text"
-            name="firstName"
-            onChange={changeFirstName}
-            value={firstName}
-          ></input>
-        </label> */}
+        
         <br />
         <TextField
             className={classes.button}
@@ -132,16 +123,7 @@ const Register = () => {
             onChange={changeLastName}
             value={lastName}
           />
-        {/* <label>
-          {" "}
-          Apellido:
-          <input
-            type="text"
-            name="lastName"
-            onChange={changeLastName}
-            value={lastName}
-          ></input>
-        </label> */}
+       
         <br />
         <TextField
             className={classes.button}
@@ -152,16 +134,7 @@ const Register = () => {
             onChange={changeEmail}
             value={email}
           />
-        {/* <label>
-          {" "}
-          Email:
-          <input
-            type="text"
-            name="email"
-            onChange={changeEmail}
-            value={email}
-          ></input>
-        </label> */}
+       
         <br />
         <TextField
             className={classes.button}
@@ -172,16 +145,7 @@ const Register = () => {
             onChange={changePassword}
             value={password}
           />
-        {/* <label>
-          {" "}
-          Password:
-          <input
-            type="password"
-            name="password"
-            onChange={changePassword}
-            value={password}
-          ></input>
-        </label> */}
+       
         <br />
         <div className={classes.logIn}>
         <Button

@@ -12,7 +12,7 @@ Objetivos 1ra etapa:
 - Ver producto individual, 
 - Carrito de compras
 
-Objetivos 2da erapa:
+Objetivos 2da etapa:
 - Checkout
 - Historial de órdenes (desde el lado del usuario)
 - Administrador de usuarios

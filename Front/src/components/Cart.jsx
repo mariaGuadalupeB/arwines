@@ -94,14 +94,15 @@ const Cart = () => {
   }
   
   const checkOutCart = () => {
-    return axios
+    if(items.length) {
+      return axios
       .post("http://localhost:5000/api/cart/", { cart_items, total }, {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(() => dispatch(resetCart_items()))
-      .then(() => dispatch(resetCart_items()))
       .then(() => localStorage.setItem('cart_items', JSON.stringify([])))
       .then(() => history.push("/checkoutcart"))
+    }
   }
 
   const functionAddSub = (arr) => {
@@ -211,7 +212,8 @@ const Cart = () => {
               </TableRow>
             </TableHead>
 
-            <TableBody>
+            {items.length ? (
+              <TableBody>
               {items.length &&
                 items.map((wine, i) => (
                   <TableRow key={i}>
@@ -245,7 +247,9 @@ const Cart = () => {
                     </TableCell>
                   </TableRow>
                 ))}
-            </TableBody>
+              </TableBody> ) : 'No hay productos para mostrar!'
+            }
+            
 
           </Table>
         </TableContainer>
@@ -257,6 +261,7 @@ const Cart = () => {
             <Box flexGrow={1}></Box>
             <Box>
               <Button
+                disabled={items.length ? false : true}
                 variant="contained"
                 color="primary"
                 onClick={checkOutCart}

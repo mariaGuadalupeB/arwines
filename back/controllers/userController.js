@@ -3,6 +3,8 @@ require('dotenv').config();
 const helpers = require('../utils/helpers')
 const {User, Cart,Cart_item} = require('../db/models')
 const { Op } = require("sequelize");
+const { registerEmail } = require("../utils/sendEmail")
+
 // const User = require(`../db/models/User`);
 // const Cart = require(`../db/models/Cart`);
 
@@ -23,6 +25,8 @@ userController.register = (req, res, next) => {
         const token = user.generateToken()
         const {id,firstName,email, admin} = user.dataValues
 
+        registerEmail(email)
+        
         user.getCarts({where: {status : `active`}, include: Cart_item})
         .then(async cart => {
             let cart_items = await cart[0].getCart_items({raw:true, attributes: [`productId`, `quantity`]})

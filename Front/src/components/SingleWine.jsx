@@ -113,7 +113,6 @@ export default function SingleWine({ match }) {
           </div>
         </Grid>
       </Grid>
-      <hr />
 
       {selectedWine.reviews && selectedWine.reviews.length ? <ReviewsList reviews={selectedWine.reviews}/> : null }
       

@@ -68,13 +68,18 @@ cartController.checkOutCart = (req, res, next) => {
           .then(() =>{
             User.findByPk(userTokenId)
             .then(user=>user.createCart(Cart))
-            .then(data => res.send(data))
+            .then(data => {
+              res.send(data)
+            })
+    })
+    .then(() => {
+          const userEmail = req.user.email;
+          sendEmail(userEmail)
     })
   })
   .catch(err=>res.send(err.message))
 
-  const userEmail = req.user.email;
-  sendEmail(userEmail)
+  
 
 };
 

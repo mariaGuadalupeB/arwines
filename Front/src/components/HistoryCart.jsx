@@ -19,6 +19,7 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import DeleteIcon from "@material-ui/icons/Delete";
+import AddReview from './productsReviews/AddReview';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,8 +68,21 @@ const HistoryCart = () => {
   const dispatch = useDispatch();
   const cart_items = useSelector((state) => state.cart_items);
   const { token } = useSelector((state) => state.user);
+  const [openAddReview, setOpenAddReview] = React.useState(false);
   const [items, setItems] = useState([]);
+  const [selectedProduct, setSelectedProduct ] = React.useState({});
   const classes = useStyles();
+  const [userReviewsByProducts, setUserReviewsByProducts] = React.useState([]);
+  const [triggerUpdateList, setTriggerUpdateList] = React.useState(false);
+
+  const handleTriggerUpdateList = () => {
+    setTriggerUpdateList(triggerUpdateList => !triggerUpdateList);
+  }
+
+  const handleOpenAddReview = product => {
+    setSelectedProduct(product);
+    setOpenAddReview(openAddReview => !openAddReview);
+  }
 
   React.useEffect(() => {
     axios
@@ -79,6 +93,14 @@ const HistoryCart = () => {
         setItems(data);
       });
   }, []);
+
+  React.useEffect(() => {
+    axios.get(`http://localhost:5000/api/review`, { headers: { Authorization: `Bearer ${token}` } })
+    .then(r => r.data)
+    .then(reviews => {
+      setUserReviewsByProducts(reviews);
+    })
+  }, [triggerUpdateList])
 
   return (
     <div>
@@ -107,8 +129,13 @@ const HistoryCart = () => {
           </Box>
         </div>
       </div>
-
       <Grid className={classes.grid}>
+        {openAddReview ? 
+          <AddReview 
+            handleOpenAddReview={handleOpenAddReview}
+            selectedProduct={selectedProduct}
+            handleTriggerUpdateList={handleTriggerUpdateList}
+          /> : ''}
         <TableContainer component={Paper}>
           <Table
             className={classes.table}
@@ -121,16 +148,22 @@ const HistoryCart = () => {
                 <TableCell align="center">Producto/s</TableCell>
                 <TableCell align="center">Total</TableCell>
                 <TableCell align="center">Estado</TableCell>
+                <TableCell align="center">Opciones</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {items.length &&
                 items.map((item, i) => (
                   <TableRow key={i}>
-                    <TableCell align="center">{item.status === "rejected" ? "-" : item["cart_items.cartId"]}</TableCell>
-                    <TableCell align="center">{item.status === "rejected" ? "-" : item["cart_items.product.name"]}</TableCell>
-                    <TableCell align="center">{item.status === "rejected" ? "-" : "$" + item.total}</TableCell>
-                    <TableCell align="center">{item.status === "confirmed" ? <Link to="/review">{item.status}</Link> : item.status}</TableCell>
+                    <TableCell align="center">{item["cart_items.cartId"]}</TableCell>
+                    <TableCell align="center">{item["cart_items.product.name"]}</TableCell>
+                    <TableCell align="center">${item.total}</TableCell>
+                    <TableCell align="center">{item.status}</TableCell>
+                    {userReviewsByProducts.includes(item["cart_items.product.id"]) ? 
+                      <TableCell align="center">Ya agregaste una review</TableCell>
+                      :
+                      <TableCell align="center">{item.status === "confirmed" ? <Button variant='contained' color='primary' onClick={() => handleOpenAddReview(item)}>ADD REVIEW</Button> : '' }</TableCell>
+                      }
                   </TableRow>
                 ))}
             </TableBody>

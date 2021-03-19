@@ -1,7 +1,7 @@
 
 require('dotenv').config();
 const helpers = require('../utils/helpers')
-const {User, Cart,Cart_item} = require('../db/models')
+const {User, Cart, Cart_item, Review} = require('../db/models')
 const { Op } = require("sequelize");
 // const User = require(`../db/models/User`);
 // const Cart = require(`../db/models/Cart`);
@@ -77,9 +77,10 @@ userController.changeRole = (req, res, next) => {
 }
 
 userController.getUser = (req, res, next) => {
-    User.findByPk(req.params.id)
+    User.findByPk(req.params.id, {include: {model: Review, attributes: ['productId'], raw: true}})
     .then(data => {
     if(!data) res.sendStatus(404)
+    else res.status(200).send(data)
     })
 }
 

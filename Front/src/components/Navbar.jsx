@@ -70,6 +70,7 @@ const Navbar = () => {
 
           <div style={{ display: "flex" }}>
             <input
+              style={{margin: '1.2em 1em 0 1em'}}
               type="text"
               placeholder="Busca productos marcas y mas..."
               value={query}
@@ -136,7 +137,7 @@ const Navbar = () => {
                                      <Button variant="contained" style={{backgroundColor: '#38182F', color: 'white', textDecoration: 'underline'}}>ADMIN</Button>
                                 </Link>
                                  :
-                                <Link to='/cart'><span className="material-icons">shopping_cart</span></Link> 
+                                <Link to='/cart'><span className="material-icons" style={{marginTop: '0.2em', color: '#38182F'}}>shopping_cart</span></Link> 
                                 }
                             </div>
                             )

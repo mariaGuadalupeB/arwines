@@ -80,7 +80,7 @@ export default function SingleWine({ match }) {
                     <div className={style.quantity}>
                       <span className={style.cantidad}>
                         <FormControl className={useStyles.formControl}>
-                          <Select name="quantity" onChange={(e) => setQuantity(e.target.value)} className={style.cantidad} >
+                          <Select value={quantity} name="quantity" onChange={(e) => setQuantity(e.target.value)} className={style.cantidad} >
 
                             {stock && stock.map((n) => {
                               return <MenuItem key={n} value={n}>{n} {n > 1 ? 'unidades' : 'unidad'}</MenuItem>

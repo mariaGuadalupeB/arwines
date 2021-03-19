@@ -18,8 +18,16 @@ controller.addReview = (req, res, next) => {
 
             res.status(201).send(review);
         })
+        .catch(next); 
+};
+
+controller.reviewExists = (req, res, next) => {
+    Review.findAll({where: { userId: req.user.userId }, attributes: ['productId'] })
+        .then(reviews => {
+            reviews = reviews.map(review => review.productId)
+            res.status(200).send(reviews);
+        })
         .catch(next);
-        
 };
 
 module.exports = controller;

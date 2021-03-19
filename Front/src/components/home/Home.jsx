@@ -6,10 +6,12 @@ import GalleryContainer from '../../containers/GalleryContainer';
 import Footer from '../footer/Footer';
 import {setWines} from '../../store/wines';
 import {Link as ScrollLink} from 'react-scroll';
+import {useHistory} from 'react-router-dom';
 
 const Home = () => {
     const styles = useStyles();
     const dispatch = useDispatch();
+    const history = useHistory();
 
     // pensar una logica que no haga un pedido al back cada vez que ingreso al home
     React.useEffect(() => {
@@ -22,8 +24,8 @@ const Home = () => {
         <div className={styles.container}>
             <AppBar position="relative" className={styles.appbar}>
               <Toolbar className={styles.toolbar}>
-                <Button className={styles.button}>
-                    CATEGORIES
+                <Button className={styles.button} onClick={() => history.push('/products')}>
+                    PRODUCTS
                 </Button>
                 <div className={styles.verticalDivider}></div>
                 <Button className={styles.button}>

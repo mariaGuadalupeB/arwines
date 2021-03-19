@@ -77,8 +77,8 @@ const ProductsTable = () => {
               <TableHead>
                 <TableRow>
                   <StyledTableCell align="right">ID</StyledTableCell>
-                  <StyledTableCell align="right">Name</StyledTableCell>
-                  <StyledTableCell align="right">Description</StyledTableCell>
+                  <StyledTableCell align="center">Name</StyledTableCell>
+                  <StyledTableCell align="center">Description</StyledTableCell>
                   <StyledTableCell align="right">Weight</StyledTableCell>
                   <StyledTableCell align="right">Quantity</StyledTableCell>
                   <StyledTableCell align="right">Price</StyledTableCell>
@@ -90,8 +90,8 @@ const ProductsTable = () => {
                 {products.map((row) => (
                   <StyledTableRow key={row.id}>
                     <StyledTableCell align="right">{row.id}</StyledTableCell>
-                    <StyledTableCell align="right">{row.name}</StyledTableCell>
-                    <StyledTableCell align="right">{row.description}</StyledTableCell>
+                    <StyledTableCell align="center">{row.name}</StyledTableCell>
+                    <StyledTableCell align="center" style={{width: '42em'}}>{row.description}</StyledTableCell>
                     <StyledTableCell align="right">{row.weight}</StyledTableCell>
                     <StyledTableCell align="right">{row.quantity}</StyledTableCell>
                     <StyledTableCell align="right">${row.price}</StyledTableCell>

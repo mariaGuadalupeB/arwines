@@ -1,7 +1,7 @@
 // const Cart = require("../db/models/Cart");
 // const Product = require("../db/models/Product");
 // const Cart_item = require("../db/models/Cart_item");
-const { Cart, User, Product, Cart_item } = require("../db/models");
+const { Cart, User, Product, Cart_item, Review } = require("../db/models");
 const sendEmail = require("../utils/sendEmail")
 
 const { Op } = require("sequelize");
@@ -119,11 +119,10 @@ cartController.getCarts_items = (req, res, next) => {
   
   Cart.findAll({
     where: {[Op.or]:[{status: "pending"}, {status: "confirmed"}, {status: "rejected"}], userId: userTokenId},
-    include: {model: Cart_item, include: Product},
+    include: {model: Cart_item, include: {model: Product, include: [Review]}},
     raw: true
    })
    .then(userCart=>{
-     console.log(userCart)
       res.status(200).send(userCart)
    })
     .catch(next);
@@ -131,7 +130,7 @@ cartController.getCarts_items = (req, res, next) => {
 cartController.getCarts = (req, res, next) => {
   Cart.findAll({
     where: {status: {[Op.ne]: 'active'}},
-    include: [{model: Cart_item, include: [Product]}]})
+    include: [{model: Cart_item, include: {model: Product, include: [Review]}}]})
   // Cart.findAll()
     .then(carts => res.status(200).send(carts))
     .catch(next);

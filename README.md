@@ -18,6 +18,9 @@ Objetivos 2da erapa:
 - Administrador de usuarios
 - Administrador de productos
 - Filtro por categorías
+- Administrador de órdenes
+- Reviews y rating (estrellas)
+
 
 Desarrollo: 
 - Back y Front separado en puertos y modulos,

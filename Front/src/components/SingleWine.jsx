@@ -29,7 +29,7 @@ export default function SingleWine({ match }) {
   React.useEffect(() => {
     dispatch(setWine(parseInt(match.params.id))).then((wine) => {
       const value = wine.payload.quantity > 6 ? 6 : wine.payload.quantity;
-
+      
       setStock(Array.from({ length: value }, (_, i) => i + 1));
     });
   }, []);
@@ -53,6 +53,7 @@ export default function SingleWine({ match }) {
     
     history.push("/cart")
   }
+  console.log(selectedWine)
 
   return (
     <div className='row'>
@@ -65,6 +66,10 @@ export default function SingleWine({ match }) {
         <Grid item xs={6}>
           <div className={style.rowDerecha}>
             <h1 className={style.tituloVino}>{selectedWine.name}</h1>
+            <h3>Category:</h3>
+            {selectedWine.categories && selectedWine.categories.map(category => {
+                return <small>{category.name}</small>
+            })}
             {selectedWine.reviews && selectedWine.reviews.length ? <Stars number={Math.ceil(selectedWine.reviews.reduce((acc, ele) => acc += ele.rating , 0)/selectedWine.reviews.length)}/> : null }
             <div className={style.boxPrice}>
               <h3 className={style.precio}>Precio: $ {selectedWine.price}</h3>

@@ -39,7 +39,6 @@ controller.updateProduct = (req, res, next) => {
                 }
             })
             .catch(next);
-        s
     }
     else res.status(403).send('Unauthorized')
 };

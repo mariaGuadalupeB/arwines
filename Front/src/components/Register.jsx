@@ -5,6 +5,7 @@ import { sendRegisterRequest } from "../store/user";
 import { validateEmail, validatePassword } from "../utils/validations"
 import { saveCartItems } from "../store/cart";
 // MATERIAL UI
+import { CircularProgress } from "@material-ui/core";
 import Button from "@material-ui/core/Button"
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
@@ -40,6 +41,7 @@ const Register = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
@@ -51,6 +53,8 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsLoading(true);
+
     if(validateEmail(email) === false){
       return setError("Credenciales invalidas")
     } 
@@ -63,6 +67,8 @@ const Register = () => {
 
       const cart_items = JSON.parse(localStorage.getItem("cart_items"))
       dispatch(saveCartItems(cart_items))
+
+      setIsLoading(false);
       history.push("/");
     })
   };
@@ -187,6 +193,9 @@ const Register = () => {
               >
           enviar
         </Button>
+            {
+              isLoading ? <CircularProgress/> : null
+            }
 
         </div>
         

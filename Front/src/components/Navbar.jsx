@@ -63,7 +63,8 @@ const Navbar = () => {
         <div className={styles.orden}>
           <Link to="/">
             <img
-              src="https://www.ubp.edu.ar/wp-content/uploads/2014/09/logo-de-geovinar-pin-01.png"
+              style={{marginTop: '0.8em'}}
+              src="https://i.imgur.com/BxAbJLc.png"
               alt="arwines"
             />
           </Link>
@@ -126,7 +127,7 @@ const Navbar = () => {
                             !isLoggedIn ? 
                             (
                                 <Link to="/register">
-                                    <Button variant="contained" style={{backgroundColor: '#38182F', color: 'white', textDecoration: 'underline'}}>Register</Button>
+                                    <Button variant="contained" style={{backgroundColor: '#38182F', color: 'white', textDecoration: 'underline', marginLeft: '1.5em'}}>Register</Button>
                                 </Link>
                             ) 
                             : 
@@ -134,11 +135,12 @@ const Navbar = () => {
                             <div className={styles.carrito}>
                                 {user.admin ? 
                                 <Link to="/admin">
-                                     <Button variant="contained" style={{backgroundColor: '#38182F', color: 'white', textDecoration: 'underline'}}>ADMIN</Button>
+                                     <Button variant="contained" style={{backgroundColor: '#38182F', color: 'white', textDecoration: 'underline', margin: '0 1em 1em 0'}}>ADMIN</Button>
                                 </Link>
                                  :
-                                <Link to='/cart'><span className="material-icons" style={{marginTop: '0.2em', color: '#38182F'}}>shopping_cart</span></Link> 
+                                 ''
                                 }
+                                <Link to='/cart'><span className="material-icons" style={{margin: '0.2em 0 0 0.8em', color: '#38182F'}}>shopping_cart</span></Link> 
                             </div>
                             )
                                     

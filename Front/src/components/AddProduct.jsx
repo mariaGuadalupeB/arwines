@@ -6,8 +6,8 @@ import {useSelector} from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
     box: {
-        height: '30em',
-        width: '30em',
+        height: '35em',
+        width: '35em',
         backgroundColor: '#e6e6e6',
         position: 'absolute',
         zIndex: 1,

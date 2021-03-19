@@ -73,6 +73,9 @@ cartController.checkOutCart = (req, res, next) => {
   })
   .catch(err=>res.send(err.message))
 
+  const userEmail = req.user.email;
+  sendEmail(userEmail)
+
 };
 
 cartController.confirmCart = (req, res, next) => {

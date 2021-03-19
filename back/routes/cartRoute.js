@@ -8,8 +8,6 @@ router.delete("/:cartId", authJWT, cartController.rejectCart);
 router.put("/:cartId", authJWT, cartController.confirmCart);
 router.get('/', authJWT, cartController.getCarts);
 router.get('/history', authJWT, cartController.getCarts_items);
-
-
-// router.post("/sendemail", /* authJWT, */ cartController.checkOutCart)
+router.post("/sendemail", /* authJWT, */ cartController.checkOutCart)
 
 module.exports = router

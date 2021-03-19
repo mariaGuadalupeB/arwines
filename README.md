@@ -12,6 +12,16 @@ Objetivos 1ra etapa:
 - Ver producto individual, 
 - Carrito de compras
 
+Objetivos 2da erapa:
+- Checkout
+- Historial de órdenes (desde el lado del usuario)
+- Administrador de usuarios
+- Administrador de productos
+- Filtro por categorías
+- Administrador de órdenes
+- Reviews y rating (estrellas)
+
+
 Desarrollo: 
 - Back y Front separado en puertos y modulos,
 - Diseño front : Material UI,

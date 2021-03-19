@@ -44,7 +44,6 @@ const AddCategory = ({toggleAddCategoryWindow, categories, setCategories, select
     };
 
     const handlePostNewCategory = category => {
-        if(!category.name.trim().length || !category.description.trim().length) return;
 
         if(selectedCategory) {
             axios.put(`http://localhost:5000/api/category/${category.id}`, category, { headers: { Authorization: `Bearer ${token}` } })

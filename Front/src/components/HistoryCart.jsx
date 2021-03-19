@@ -154,17 +154,19 @@ const HistoryCart = () => {
             <TableBody>
               {items.length &&
                 items.map((item, i) => (
-                  <TableRow key={i}>
-                    <TableCell align="center">{item["cart_items.cartId"]}</TableCell>
-                    <TableCell align="center">{item["cart_items.product.name"]}</TableCell>
-                    <TableCell align="center">${item.total}</TableCell>
-                    <TableCell align="center">{item.status}</TableCell>
-                    {userReviewsByProducts.includes(item["cart_items.product.id"]) ? 
-                      <TableCell align="center">Ya agregaste una review</TableCell>
-                      :
-                      <TableCell align="center">{item.status === "confirmed" ? <Button variant='contained' color='primary' onClick={() => handleOpenAddReview(item)}>ADD REVIEW</Button> : '' }</TableCell>
-                      }
-                  </TableRow>
+                    item["cart_items.product.id"] ? (
+                      <TableRow key={i}>
+                        <TableCell align="center">{item["cart_items.cartId"]}</TableCell>
+                        <TableCell align="center">{item["cart_items.product.name"]}</TableCell>
+                        <TableCell align="center">${item.total}</TableCell>
+                        <TableCell align="center">{item.status}</TableCell>
+                        {userReviewsByProducts.includes(item["cart_items.product.id"]) ? 
+                          <TableCell align="center">Ya agregaste una review</TableCell>
+                          :
+                          <TableCell align="center">{item.status === "confirmed" ? <Button variant='contained' color='primary' onClick={() => handleOpenAddReview(item)}>ADD REVIEW</Button> : '' }</TableCell>
+                        }
+                      </TableRow>
+                    ) : ''
                 ))}
             </TableBody>
           </Table>

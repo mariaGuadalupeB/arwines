@@ -66,9 +66,10 @@ export default function SingleWine({ match }) {
         <Grid item xs={6}>
           <div className={style.rowDerecha}>
             <h1 className={style.tituloVino}>{selectedWine.name}</h1>
-            <h3>Category:</h3>
-            {selectedWine.categories && selectedWine.categories.map(category => {
-                return <small>{category.name}</small>
+            <h4>Category:</h4>
+            {selectedWine.categories && selectedWine.categories.map((category, i, array) => {
+                return <small>{i < array.length - 1 ? `${category.name}, ` : `${category.name}`}</small>
+                
             })}
             {selectedWine.reviews && selectedWine.reviews.length ? <Stars number={Math.ceil(selectedWine.reviews.reduce((acc, ele) => acc += ele.rating , 0)/selectedWine.reviews.length)}/> : null }
             <div className={style.boxPrice}>

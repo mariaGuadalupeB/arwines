@@ -45,7 +45,7 @@
   .barraI{
     display: flex;
     justify-content: flex-end;
-    margin-top: -38px;
+    margin-top: -2em;
   }
   .botonLogIn{
     margin-top: -8px;

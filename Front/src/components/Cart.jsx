@@ -203,7 +203,7 @@ const Cart = () => {
           >
             <TableHead>
               <TableRow>
-                <TableCell align="center">Producto</TableCell>
+                <TableCell align="center">Producto:</TableCell>
                 {<TableCell align="right"></TableCell>}
                 <TableCell align="center">Precio:</TableCell>
                 <TableCell align="center">Cantidad:</TableCell>

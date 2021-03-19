@@ -2,7 +2,7 @@
 // const Product = require("../db/models/Product");
 // const Cart_item = require("../db/models/Cart_item");
 const { Cart, User, Product, Cart_item, Review } = require("../db/models");
-const sendEmail = require("../utils/sendEmail")
+const {sendEmail} = require("../utils/sendEmail")
 
 const { Op } = require("sequelize");
 
@@ -72,14 +72,12 @@ cartController.checkOutCart = (req, res, next) => {
               res.send(data)
             })
     })
-    .then(() => {
-          const userEmail = req.user.email;
-          sendEmail(userEmail)
-    })
+  })
+  .then(() => {
+    const userEmail = req.user.email;
+    sendEmail(userEmail)  
   })
   .catch(err=>res.send(err.message))
-
-  
 
 };
 
